@@ -124,6 +124,6 @@ Community Impact Guidelines from [Mozilla’s CoC Enforcement Ladder][Mozilla Co
 
 Each team member must upload their handwritten signature image to their personal Google Drive and embed it here using Markdown.
 
-Use this format:
 ```markdown
-![Member Name Signature](https://drive.google.com/uc?export=view&id=YOUR_FILE_ID)
+![Cameron Arruda](https://drive.google.com/uc?export=view&id=15nSYtTvn4s2G2l4YR7cXg5xI7Q5UAQ9x)
+
