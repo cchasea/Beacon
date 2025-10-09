@@ -139,3 +139,12 @@ Asher MCcoy
 Cameron Arruda
 Developed by 305Soft
 University of Rhode Island, 2025
+
+---
+
+## Code of Conduct
+
+This project follows the [Contributor Covenant v2.1](https://www.contributor-covenant.org/version/2/1/code_of_conduct.html).  
+Please review our team’s full [Code of Conduct](docs/CONDUCT.md) before contributing.
+
+[![Contributor Covenant](https://img.shields.io/badge/Contributor%20Covenant-2.1-4baaaa.svg)](docs/CONDUCT.md)
