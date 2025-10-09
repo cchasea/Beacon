@@ -126,7 +126,7 @@ Each team member must upload their handwritten signature image to their personal
 
 ![Cameron Arruda](https://drive.google.com/uc?export=view&id=15nSYtTvn4s2G2l4YR7cXg5xI7Q5UAQ9x)
 ![Asher McCoy](https://drive.google.com/uc?export=view&id=1NWcxFE0H-0uidp_L59Yk1R8OUjF0EQRt)
-![Dezmond Tracy](https://drive.google.com/uc?export=view&id=1MDHoBbS3wPTcgkF9jmV2DVTgFlZVqTeI)
+![Dezmond Tracy](https://drive.google.com/uc?export=view&id=1vPJPdtdMvZ-Pm4Qczzv__bG8ASHcXwpJ)
 ![Ryan Conlan](https://drive.google.com/uc?export=view&id=1jjUE8jbSIbihSy-U_OJ9xtwHBJYFQpmj)
 
 
