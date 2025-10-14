@@ -10,9 +10,9 @@
 
  
 - ## Observation 2 (Combining Personal, Academic, and Group):
-  - ### Observation Statement:
-  - ### Supporting Data:
-  - ### Team Action (if any):
+  - ### Observation Statement: Many users wanted to be able to combine their multiple academic calenders, and being able to add personal deadlines or group projects. 
+  - ### Supporting Data: 32% of users are unsatified with their current scheduling apps. 60% report their biggest bother is having to use multiple websites for their calenders. 84% say its  a little or great importance to be able to compine multiple calander types (personal, academic, etc.).
+  - ### Team Action (if any): Create ability to combine multiple academic calenders, and ability to add customized dates inlcuding shared group projects. 
  
 - ## Observation 3 (Labeling):
   - ### Observation Statement: Many users suggested there be labels for tasks that fall into one or more groups.
