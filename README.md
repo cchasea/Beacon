@@ -1,10 +1,10 @@
-# Campus-Life-Organizer
+# Beacon
 
 A unified academic, extracurricular, and productivity dashboard for college students.
 
 1. Purpose
 
-Campus Life Organizer is a cross-platform web and mobile app designed to help college students manage their academic, work, and extracurricular schedules in one unified dashboard.
+Beacon is a cross-platform web and mobile app designed to help college students manage their academic, work, and extracurricular schedules in one unified dashboard.
 It integrates assignments, deadlines, and personal events from learning management systems (LMS) such as Brightspace and Canvas, as well as Google Calendar, while using AI to recommend personalized study sessions and reminders.
 
 2. Background
@@ -12,7 +12,7 @@ It integrates assignments, deadlines, and personal events from learning manageme
 College students often struggle to balance multiple priorities — classes, part-time jobs, and social commitments — across several disconnected platforms.
 Deadlines from systems like Brightspace, Canvas, and Google Calendar are fragmented and hard to track, resulting in missed assignments and increased stress.
 
-Campus Life Organizer addresses this by merging everything into one place and offering AI-powered productivity tools to promote better time management and reduce cognitive overload.
+Beacon addresses this by merging everything into one place and offering AI-powered productivity tools to promote better time management and reduce cognitive overload.
 
 Key integrations:
 
@@ -56,7 +56,7 @@ This snippet demonstrates the logic flow for syncing user assignments and genera
 
 5. Installation
 
-Campus Life Organizer is currently in the MVP stage.
+Beacon is currently in the MVP stage.
 Follow these steps to set up a local development environment:
 
 # Clone repository
