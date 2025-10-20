@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "419464159221",
+    "project_id": "campus-life-organizer-sjgd9s",
+    "storage_bucket": "campus-life-organizer-sjgd9s.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:419464159221:android:d13016eef4d05567dc8abc",
+        "android_client_info": {
+          "package_name": "com.mycompany.campuslifeorganizer"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCPlSJ3tAuGzVxAipgjMZwNPEKdjshslOE"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
