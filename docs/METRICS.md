@@ -23,4 +23,7 @@
 
 - ## Number of Events Created Per User:
   - ### Event counter for each user that is incremented each time a user completes creating a new event.
+ 
+- ## Number of Events Not Marked Done After DueDate Has Passed
+  - ### Measured using custom Firebase Analytics that counts the number of uncompleted tasks after the selected duedate has passed. 
 
