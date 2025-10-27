@@ -10,10 +10,10 @@
   - ### <how we will collect this metric>
 
 - ## Number of Users Still Active After a Week:
-  - ### <how we will collect this metric>
+  - ### Calculated using Firebase Analytics retention reports comparing user activity on day 7 after signup.
 
 - ## Click Through Rate (CTR):
-  - ### <how we will collect this metric>
+  - ### Measured via Firebase Analytics event tracking that logs when a user views and clicks interactive elements (e.g., buttons, links).
 
 - ## Percentage of Each Role:
   - ### <how we will collect this metric>
