@@ -21,3 +21,6 @@
 - ## Percentage of Users with Notifications On:
   - ### <how we will collect this metric>
 
+- ## Number of Events Created Per User:
+  - ### <how we will collect this metric>
+
