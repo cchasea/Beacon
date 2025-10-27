@@ -16,10 +16,10 @@
   - ### Measured via Firebase Analytics event tracking that logs when a user views and clicks interactive elements (e.g., buttons, links).
 
 - ## Percentage of Each Role:
-  - ### <how we will collect this metric>
+  - ### We can use Firebase Analytics to make note of how many users select each role during profile setup.
 
 - ## Percentage of Users with Notifications On:
-  - ### <how we will collect this metric>
+  - ### Similar to determining how many users fall under each role, we can also using Firebase Analytics to store and see how many users choose to get notifications from the app.
 
 - ## Number of Events Created Per User:
   - ### Event counter for each user that is incremented each time a user completes creating a new event.
