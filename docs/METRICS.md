@@ -4,7 +4,7 @@
   - ### <how we will collect this metric>
 
 - ## Number of People Who Create an Account:
-  - ### <how we will collect this metric>
+  - ### Adoption via Firebase Authentication signups
 
 - ## Daily Active Users (DAU):
   - ### <how we will collect this metric>
@@ -22,5 +22,5 @@
   - ### <how we will collect this metric>
 
 - ## Number of Events Created Per User:
-  - ### <how we will collect this metric>
+  - ### Event counter for each user that is incremented each time a user completes creating a new event.
 
