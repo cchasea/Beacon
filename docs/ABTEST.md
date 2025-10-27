@@ -28,10 +28,12 @@
 
 ## Ryan:
 ### Generic vs. Personalized Reminder Notifications
+- **User Story Number:** US 6 - Metrics
 - **Goal:** Increase user retention and re-engagement through more relevant reminders.
 - **Variant A:** Generic push notification — “Don’t forget to study today!”
 - **Variant B:** Personalized push notification — “You have 2 assignments due tomorrow. Let’s plan your study session now!”
 - **Metrics:** Notification open rate, 7-day and 30-day retention, re-engagement sessions.
 - **Tool:** Firebase A/B Testing + Remote Config (50/50 user split).
 - **Hypothesis:** Personalized notifications will drive higher open rates and retention because they feel more relevant and actionable to students.
+- **Experiment:** We will use Firebase Remote Config to randomly assign 50% of users to receive a generic reminder notification and 50% to receive a personalized reminder notification. We will then use Firebase Analytics to track engagement and retention metrics between the two groups.
 - **Success Criteria:** Variant B shows ≥10% higher open rate or ≥5% improvement in 7-day retention compared to Variant A.
