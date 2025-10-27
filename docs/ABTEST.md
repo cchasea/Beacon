@@ -17,7 +17,14 @@
   - **Success Criteria:** Dark Mode shows ≥10% increase in session duration or ≥5% improvement in retention.
 
 ## Asher:
-  - ### <A/B test desc here>
+  - ### Combined vs seperate calendar screens
+  - **User Story Number:** US 6 - Metrics
+  - **Goal:** Determine which screen organization enables users to miss less assignments and deadlines, and feel more comfortable knowing what their future events are. We will track the number of events that are still marked undone after the due date has passed.
+  - **Variant A:** Two screens (current version). Home page lists things due today, due next week, and overdue. Second page is the calendar with all the colored events like google calendar. Here is where you would add new events. 
+  - **Variant B:** One screen that shows the calendar and the events listed beneath in chronological order.
+  - **Hypothesis:** Two screens would lead to decreased missed assignments because it creates a clear and updated display showing what is due the soonest. 
+  - **Metrics:** Assignments that are not checked as completed after the due date.
+  - **Tool:** Firebase Analytics with Remote Config 50/50 user split.
 
 ## Ryan:
 ### Generic vs. Personalized Reminder Notifications
