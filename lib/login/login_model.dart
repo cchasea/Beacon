@@ -1,4 +1,5 @@
 import '/flutter_flow/flutter_flow_util.dart';
+import '/index.dart';
 import 'login_widget.dart' show LoginWidget;
 import 'package:flutter/material.dart';
 
@@ -13,11 +14,14 @@ class LoginModel extends FlutterFlowModel<LoginWidget> {
   // State field(s) for password_textField widget.
   FocusNode? passwordTextFieldFocusNode;
   TextEditingController? passwordTextFieldTextController;
+  late bool passwordTextFieldVisibility;
   String? Function(BuildContext, String?)?
       passwordTextFieldTextControllerValidator;
 
   @override
-  void initState(BuildContext context) {}
+  void initState(BuildContext context) {
+    passwordTextFieldVisibility = false;
+  }
 
   @override
   void dispose() {

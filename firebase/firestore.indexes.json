@@ -1,0 +1,18 @@
+{
+  "indexes": [
+    {
+      "collectionGroup": "calendar_event",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "User",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "Date",
+          "order": "ASCENDING"
+        }
+      ]
+    }
+  ]
+}
