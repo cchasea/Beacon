@@ -926,6 +926,7 @@ class _ProfileWidgetState extends State<ProfileWidget> {
                           padding: EdgeInsetsDirectional.fromSTEB(
                               0.0, 16.0, 0.0, 0.0),
                           child: FFButtonWidget(
+                            key: ValueKey('Logout_5ygv'),
                             onPressed: () async {
                               logFirebaseEvent('PROFILE_PAGE_Logout_ON_TAP');
                               logFirebaseEvent('Logout_auth');

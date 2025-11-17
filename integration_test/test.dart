@@ -101,6 +101,84 @@ void main() async {
       expect(find.text('Edited New Event'), findsOneWidget);
     });
   });
+
+  group('US3: Backend Management', () {
+    testWidgets('eventCreated', (WidgetTester tester) async {
+      _overrideOnError();
+
+      await tester.pumpWidget(MyApp(
+        entryPage: CalanderWidget(),
+      ));
+      await GoogleFonts.pendingFonts();
+
+      await tester.tap(find.byKey(const ValueKey('CalendarAdd')));
+      await tester.pumpAndSettle(const Duration(milliseconds: 3000));
+      await tester.enterText(find.byKey(const ValueKey('title_textField')),
+          'CSC 305 Assignment 11');
+      await tester.tap(find.byKey(const ValueKey('Calendar')));
+      await tester.enterText(find.byKey(const ValueKey('details_textField')),
+          'Assignment 11 for CSC 305 is due tomorrow night');
+      await tester.tap(find.byKey(const ValueKey('add_button')));
+      await tester.pumpAndSettle(const Duration(milliseconds: 3000));
+      await tester.tap(find.byIcon(Icons.home));
+      await tester.pumpAndSettle(const Duration(milliseconds: 3000));
+      expect(find.text('CSC 305 Assignment 11'), findsOneWidget);
+    });
+
+    testWidgets('viewingEvents', (WidgetTester tester) async {
+      _overrideOnError();
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: 'test@email.com', password: 'password123');
+      await tester.pumpWidget(MyApp(
+        entryPage: HomePageWidget(),
+      ));
+      await GoogleFonts.pendingFonts();
+
+      expect(find.text('Testing Events'), findsOneWidget);
+    });
+
+    testWidgets('eventsDisplayed', (WidgetTester tester) async {
+      _overrideOnError();
+      await FirebaseAuth.instance.signInWithEmailAndPassword(
+          email: 'test@email.com', password: 'password123');
+      await tester.pumpWidget(MyApp(
+        entryPage: HomePageWidget(),
+      ));
+      await GoogleFonts.pendingFonts();
+
+      expect(find.text('Testing Events'), findsOneWidget);
+      await tester.tap(find.byIcon(Icons.person_rounded));
+      await tester.tap(find.byKey(const ValueKey('Logout_5ygv')));
+      await tester.pumpAndSettle(const Duration(milliseconds: 3000));
+      await tester.tap(find.byKey(const ValueKey('SignUp_text_m3jr')));
+      await tester.pumpAndSettle(const Duration(milliseconds: 3000));
+      await tester.enterText(find.byKey(const ValueKey('email_textField_00vj')),
+          'test2@email.com');
+      await tester.enterText(
+          find.byKey(const ValueKey('password_textField_54lt')), 'password123');
+      await tester.enterText(
+          find.byKey(const ValueKey('confirmPassword_textField_bcjj')),
+          'password123');
+      await tester.enterText(
+          find.byKey(const ValueKey('userName_textField_n27v')), 'tester2');
+      await tester.tap(find.byKey(const ValueKey('Button_6ztc')));
+      expect(find.text('Testing Events'), findsNothing);
+    });
+
+    testWidgets('invalidEvent', (WidgetTester tester) async {
+      _overrideOnError();
+
+      await tester.pumpWidget(MyApp(
+        entryPage: CalanderWidget(),
+      ));
+      await GoogleFonts.pendingFonts();
+
+      await tester.tap(find.byKey(const ValueKey('CalendarAdd')));
+      await tester.pumpAndSettle(const Duration(milliseconds: 3000));
+      await tester.tap(find.byKey(const ValueKey('add_button')));
+      expect(find.byKey(const ValueKey('add_button')), findsOneWidget);
+    });
+  });
 }
 
 // There are certain types of errors that can happen during tests but

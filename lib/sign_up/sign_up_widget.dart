@@ -85,6 +85,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                     Container(
                       width: 400.0,
                       child: TextFormField(
+                        key: ValueKey('email_textField_00vj'),
                         controller: _model.emailTextFieldTextController,
                         focusNode: _model.emailTextFieldFocusNode,
                         autofocus: false,
@@ -189,6 +190,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                     Container(
                       width: 400.0,
                       child: TextFormField(
+                        key: ValueKey('password_textField_54lt'),
                         controller: _model.passwordTextFieldTextController,
                         focusNode: _model.passwordTextFieldFocusNode,
                         autofocus: false,
@@ -307,6 +309,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                     Container(
                       width: 400.0,
                       child: TextFormField(
+                        key: ValueKey('confirmPassword_textField_bcjj'),
                         controller:
                             _model.confirmPasswordTextFieldTextController,
                         focusNode: _model.confirmPasswordTextFieldFocusNode,
@@ -426,6 +429,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                     Container(
                       width: 400.0,
                       child: TextFormField(
+                        key: ValueKey('userName_textField_n27v'),
                         controller: _model.userNameTextFieldTextController,
                         focusNode: _model.userNameTextFieldFocusNode,
                         autofocus: false,
@@ -535,6 +539,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                 mainAxisSize: MainAxisSize.max,
                 children: [
                   FFButtonWidget(
+                    key: ValueKey('Button_6ztc'),
                     onPressed: () async {
                       logFirebaseEvent('SIGN_UP_PAGE_SIGN_UP_BTN_ON_TAP');
                       logFirebaseEvent('Button_firestore_query');

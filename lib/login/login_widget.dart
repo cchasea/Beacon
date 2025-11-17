@@ -435,6 +435,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                         context.pushNamed(SignUpWidget.routeName);
                       },
                       child: Text(
+                        key: ValueKey('SignUp_text_m3jr'),
                         'Don\'t Have an account? Sign Up',
                         style: FlutterFlowTheme.of(context).labelLarge.override(
                               font: GoogleFonts.inter(
