@@ -91,6 +91,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                       Container(
                         width: 400.0,
                         child: TextFormField(
+                          key: ValueKey('email_textField_mkmf'),
                           controller: _model.emailTextFieldTextController,
                           focusNode: _model.emailTextFieldFocusNode,
                           autofocus: false,
@@ -199,6 +200,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                       Container(
                         width: 400.0,
                         child: TextFormField(
+                          key: ValueKey('password_textField_4lj6'),
                           controller: _model.passwordTextFieldTextController,
                           focusNode: _model.passwordTextFieldFocusNode,
                           autofocus: false,
@@ -343,6 +345,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                           );
                         },
                         child: Text(
+                          key: ValueKey('forgot_password_text_7mn6'),
                           'Forgot Password',
                           style:
                               FlutterFlowTheme.of(context).labelLarge.override(
@@ -371,6 +374,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                   mainAxisSize: MainAxisSize.max,
                   children: [
                     FFButtonWidget(
+                      key: ValueKey('login_button_y5uo'),
                       onPressed: () async {
                         logFirebaseEvent('LOGIN_PAGE_login_button_ON_TAP');
                         logFirebaseEvent('login_button_auth');

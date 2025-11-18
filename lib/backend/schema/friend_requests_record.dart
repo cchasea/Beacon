@@ -20,8 +20,32 @@ class FriendRequestsRecord extends FirestoreRecord {
   int get test => _test ?? 0;
   bool hasTest() => _test != null;
 
+  // "fromUser" field.
+  String? _fromUser;
+  String get fromUser => _fromUser ?? '';
+  bool hasFromUser() => _fromUser != null;
+
+  // "toUser" field.
+  String? _toUser;
+  String get toUser => _toUser ?? '';
+  bool hasToUser() => _toUser != null;
+
+  // "status" field.
+  String? _status;
+  String get status => _status ?? '';
+  bool hasStatus() => _status != null;
+
+  // "createdAt" field.
+  DateTime? _createdAt;
+  DateTime? get createdAt => _createdAt;
+  bool hasCreatedAt() => _createdAt != null;
+
   void _initializeFields() {
     _test = castToType<int>(snapshotData['test']);
+    _fromUser = snapshotData['fromUser'] as String?;
+    _toUser = snapshotData['toUser'] as String?;
+    _status = snapshotData['status'] as String?;
+    _createdAt = snapshotData['createdAt'] as DateTime?;
   }
 
   static CollectionReference get collection =>
@@ -60,10 +84,18 @@ class FriendRequestsRecord extends FirestoreRecord {
 
 Map<String, dynamic> createFriendRequestsRecordData({
   int? test,
+  String? fromUser,
+  String? toUser,
+  String? status,
+  DateTime? createdAt,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
       'test': test,
+      'fromUser': fromUser,
+      'toUser': toUser,
+      'status': status,
+      'createdAt': createdAt,
     }.withoutNulls,
   );
 
@@ -76,11 +108,16 @@ class FriendRequestsRecordDocumentEquality
 
   @override
   bool equals(FriendRequestsRecord? e1, FriendRequestsRecord? e2) {
-    return e1?.test == e2?.test;
+    return e1?.test == e2?.test &&
+        e1?.fromUser == e2?.fromUser &&
+        e1?.toUser == e2?.toUser &&
+        e1?.status == e2?.status &&
+        e1?.createdAt == e2?.createdAt;
   }
 
   @override
-  int hash(FriendRequestsRecord? e) => const ListEquality().hash([e?.test]);
+  int hash(FriendRequestsRecord? e) => const ListEquality()
+      .hash([e?.test, e?.fromUser, e?.toUser, e?.status, e?.createdAt]);
 
   @override
   bool isValidKey(Object? o) => o is FriendRequestsRecord;

@@ -113,12 +113,12 @@ void main() async {
 
       await tester.tap(find.byKey(const ValueKey('CalendarAdd')));
       await tester.pumpAndSettle(const Duration(milliseconds: 3000));
-      await tester.enterText(find.byKey(const ValueKey('title_textField')),
-          'CSC 305 Assignment 11');
+      await tester.enterText(
+          find.byKey(const ValueKey('NameText')), 'CSC 305 Assignment 11');
       await tester.tap(find.byKey(const ValueKey('Calendar')));
-      await tester.enterText(find.byKey(const ValueKey('details_textField')),
+      await tester.enterText(find.byKey(const ValueKey('DetailsBox')),
           'Assignment 11 for CSC 305 is due tomorrow night');
-      await tester.tap(find.byKey(const ValueKey('add_button')));
+      await tester.tap(find.byKey(const ValueKey('EventAdd')));
       await tester.pumpAndSettle(const Duration(milliseconds: 3000));
       await tester.tap(find.byIcon(Icons.home));
       await tester.pumpAndSettle(const Duration(milliseconds: 3000));
@@ -146,8 +146,7 @@ void main() async {
       ));
       await GoogleFonts.pendingFonts();
 
-      expect(find.text('Testing Events'), findsOneWidget);
-      await tester.tap(find.byIcon(Icons.person_rounded));
+      await tester.tap(find.byIcon(Icons.person));
       await tester.tap(find.byKey(const ValueKey('Logout_5ygv')));
       await tester.pumpAndSettle(const Duration(milliseconds: 3000));
       await tester.tap(find.byKey(const ValueKey('SignUp_text_m3jr')));
@@ -175,8 +174,76 @@ void main() async {
 
       await tester.tap(find.byKey(const ValueKey('CalendarAdd')));
       await tester.pumpAndSettle(const Duration(milliseconds: 3000));
-      await tester.tap(find.byKey(const ValueKey('add_button')));
-      expect(find.byKey(const ValueKey('add_button')), findsOneWidget);
+      await tester.tap(find.byKey(const ValueKey('EventAdd')));
+      expect(find.byKey(const ValueKey('EventAdd')), findsOneWidget);
+    });
+  });
+
+  group('US2: User Login', () {
+    testWidgets('Successful login', (WidgetTester tester) async {
+      _overrideOnError();
+
+      await tester.pumpWidget(MyApp(
+        entryPage: LoginWidget(),
+      ));
+      await GoogleFonts.pendingFonts();
+
+      await tester.enterText(find.byKey(const ValueKey('email_textField_mkmf')),
+          'ryan.conlan@uri.edu');
+      await tester.pumpAndSettle(const Duration(milliseconds: 100));
+      await tester.enterText(
+          find.byKey(const ValueKey('password_textField_4lj6')), 'Conlan10');
+      await tester.tap(find.byKey(const ValueKey('login_button_y5uo')));
+      await tester.pumpAndSettle(const Duration(milliseconds: 1000));
+      expect(find.byKey(const ValueKey('DueToday_text_f5g7')), findsOneWidget);
+    });
+
+    testWidgets('Account does not exist', (WidgetTester tester) async {
+      _overrideOnError();
+
+      await tester.pumpWidget(MyApp(
+        entryPage: LoginWidget(),
+      ));
+      await GoogleFonts.pendingFonts();
+
+      await tester.enterText(find.byKey(const ValueKey('email_textField_mkmf')),
+          'notanemail@email.com');
+      await tester.pumpAndSettle(const Duration(milliseconds: 100));
+      await tester.enterText(
+          find.byKey(const ValueKey('password_textField_4lj6')),
+          'notrealpassword');
+      await tester.pumpAndSettle(const Duration(milliseconds: 100));
+      await tester.tap(find.byKey(const ValueKey('login_button_y5uo')));
+      await tester.pumpAndSettle(const Duration(milliseconds: 1000));
+      expect(find.byKey(const ValueKey('login_button_y5uo')), findsOneWidget);
+    });
+
+    testWidgets('Forgot Password link', (WidgetTester tester) async {
+      _overrideOnError();
+
+      await tester.pumpWidget(MyApp(
+        entryPage: LoginWidget(),
+      ));
+      await GoogleFonts.pendingFonts();
+
+      await tester.enterText(find.byKey(const ValueKey('email_textField_mkmf')),
+          'ryan.conlan@uri.edu');
+      await tester.pumpAndSettle(const Duration(milliseconds: 1000));
+      await tester.tap(find.byKey(const ValueKey('forgot_password_text_7mn6')));
+      expect(find.text('Passoword reset email sent'), findsOneWidget);
+    });
+
+    testWidgets('Navigate to Create Account', (WidgetTester tester) async {
+      _overrideOnError();
+
+      await tester.pumpWidget(MyApp(
+        entryPage: LoginWidget(),
+      ));
+      await GoogleFonts.pendingFonts();
+
+      await tester.tap(find.byKey(const ValueKey('SignUp_text_m3jr')));
+      await tester.pumpAndSettle(const Duration(milliseconds: 3000));
+      expect(find.byKey(const ValueKey('Button_6ztc')), findsOneWidget);
     });
   });
 }

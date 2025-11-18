@@ -390,6 +390,7 @@ class _AddDateTaskWidgetState extends State<AddDateTaskWidget> {
                 width: double.infinity,
                 decoration: BoxDecoration(),
                 child: FlutterFlowCalendar(
+                  key: ValueKey('Calendar'),
                   color: FlutterFlowTheme.of(context).primary,
                   iconColor: FlutterFlowTheme.of(context).secondaryText,
                   weekFormat: false,

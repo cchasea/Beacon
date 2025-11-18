@@ -156,9 +156,9 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'Profile': ProfileWidget(),
-      'GroupEvents': GroupEventsWidget(),
       'Calander': CalanderWidget(),
       'HomePage': HomePageWidget(),
+      'GroupEvents': GroupEventsWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
 
@@ -218,14 +218,16 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.groups_2_sharp,
+                  currentIndex == 1
+                      ? Icons.date_range_rounded
+                      : Icons.date_range_outlined,
                   color: currentIndex == 1
                       ? FlutterFlowTheme.of(context).primary
                       : FlutterFlowTheme.of(context).tertiary,
-                  size: 24.0,
+                  size: currentIndex == 1 ? 32.0 : 24.0,
                 ),
                 Text(
-                  'Groups',
+                  'Calendar',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 1
@@ -242,16 +244,14 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  currentIndex == 2
-                      ? Icons.date_range_rounded
-                      : Icons.date_range_outlined,
+                  Icons.home,
                   color: currentIndex == 2
                       ? FlutterFlowTheme.of(context).primary
                       : FlutterFlowTheme.of(context).tertiary,
-                  size: currentIndex == 2 ? 32.0 : 24.0,
+                  size: 24.0,
                 ),
                 Text(
-                  'Calendar',
+                  'Home',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 2
@@ -268,14 +268,14 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.home,
+                  Icons.groups_2_sharp,
                   color: currentIndex == 3
                       ? FlutterFlowTheme.of(context).primary
                       : FlutterFlowTheme.of(context).tertiary,
                   size: 24.0,
                 ),
                 Text(
-                  'Home',
+                  'Groups',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 3

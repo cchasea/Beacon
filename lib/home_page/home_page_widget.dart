@@ -157,6 +157,7 @@ class _HomePageWidgetState extends State<HomePageWidget> {
                         ),
                       ),
                       Text(
+                        key: ValueKey('DueToday_text_f5g7'),
                         'Due Today:',
                         style: FlutterFlowTheme.of(context).labelLarge.override(
                               font: GoogleFonts.inter(

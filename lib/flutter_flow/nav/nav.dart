@@ -113,15 +113,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
                     page: ProfileWidget(),
                   )),
         FFRoute(
-            name: GroupEventsWidget.routeName,
-            path: GroupEventsWidget.routePath,
-            builder: (context, params) => params.isEmpty
-                ? NavBarPage(initialPage: 'GroupEvents')
-                : NavBarPage(
-                    initialPage: 'GroupEvents',
-                    page: GroupEventsWidget(),
-                  )),
-        FFRoute(
           name: SignUpWidget.routeName,
           path: SignUpWidget.routePath,
           builder: (context, params) => SignUpWidget(),
@@ -165,6 +156,15 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
                 : NavBarPage(
                     initialPage: 'HomePage',
                     page: HomePageWidget(),
+                  )),
+        FFRoute(
+            name: GroupEventsWidget.routeName,
+            path: GroupEventsWidget.routePath,
+            builder: (context, params) => params.isEmpty
+                ? NavBarPage(initialPage: 'GroupEvents')
+                : NavBarPage(
+                    initialPage: 'GroupEvents',
+                    page: GroupEventsWidget(),
                   ))
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );

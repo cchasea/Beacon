@@ -7,8 +7,8 @@ import 'schema/util/firestore_util.dart';
 
 import 'schema/calendar_event_record.dart';
 import 'schema/n_p_s_collection_record.dart';
-import 'schema/friend_requests_record.dart';
 import 'schema/users_record.dart';
+import 'schema/friend_requests_record.dart';
 
 export 'dart:async' show StreamSubscription;
 export 'package:cloud_firestore/cloud_firestore.dart' hide Order;
@@ -19,8 +19,8 @@ export 'schema/util/schema_util.dart';
 
 export 'schema/calendar_event_record.dart';
 export 'schema/n_p_s_collection_record.dart';
-export 'schema/friend_requests_record.dart';
 export 'schema/users_record.dart';
+export 'schema/friend_requests_record.dart';
 
 /// Functions to query CalendarEventRecords (as a Stream and as a Future).
 Future<int> queryCalendarEventRecordCount({
@@ -96,43 +96,6 @@ Future<List<NPSCollectionRecord>> queryNPSCollectionRecordOnce({
       singleRecord: singleRecord,
     );
 
-/// Functions to query FriendRequestsRecords (as a Stream and as a Future).
-Future<int> queryFriendRequestsRecordCount({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-}) =>
-    queryCollectionCount(
-      FriendRequestsRecord.collection,
-      queryBuilder: queryBuilder,
-      limit: limit,
-    );
-
-Stream<List<FriendRequestsRecord>> queryFriendRequestsRecord({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollection(
-      FriendRequestsRecord.collection,
-      FriendRequestsRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
-Future<List<FriendRequestsRecord>> queryFriendRequestsRecordOnce({
-  Query Function(Query)? queryBuilder,
-  int limit = -1,
-  bool singleRecord = false,
-}) =>
-    queryCollectionOnce(
-      FriendRequestsRecord.collection,
-      FriendRequestsRecord.fromSnapshot,
-      queryBuilder: queryBuilder,
-      limit: limit,
-      singleRecord: singleRecord,
-    );
-
 /// Functions to query UsersRecords (as a Stream and as a Future).
 Future<int> queryUsersRecordCount({
   Query Function(Query)? queryBuilder,
@@ -165,6 +128,43 @@ Future<List<UsersRecord>> queryUsersRecordOnce({
     queryCollectionOnce(
       UsersRecord.collection,
       UsersRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+/// Functions to query FriendRequestsRecords (as a Stream and as a Future).
+Future<int> queryFriendRequestsRecordCount({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+}) =>
+    queryCollectionCount(
+      FriendRequestsRecord.collection,
+      queryBuilder: queryBuilder,
+      limit: limit,
+    );
+
+Stream<List<FriendRequestsRecord>> queryFriendRequestsRecord({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollection(
+      FriendRequestsRecord.collection,
+      FriendRequestsRecord.fromSnapshot,
+      queryBuilder: queryBuilder,
+      limit: limit,
+      singleRecord: singleRecord,
+    );
+
+Future<List<FriendRequestsRecord>> queryFriendRequestsRecordOnce({
+  Query Function(Query)? queryBuilder,
+  int limit = -1,
+  bool singleRecord = false,
+}) =>
+    queryCollectionOnce(
+      FriendRequestsRecord.collection,
+      FriendRequestsRecord.fromSnapshot,
       queryBuilder: queryBuilder,
       limit: limit,
       singleRecord: singleRecord,
