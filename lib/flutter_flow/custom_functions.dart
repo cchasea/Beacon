@@ -22,17 +22,3 @@ DateTime? getDate() {
       milliseconds: DateTime.now().millisecond,
       microseconds: DateTime.now().microsecond));
 }
-
-DateTime? getStartOfWeek() {
-  // Gets only the starting date of the current week
-  DateTime now = DateTime.now();
-  int daysSinceMonday = now.weekday - DateTime.monday;
-  return now.subtract(Duration(days: daysSinceMonday));
-}
-
-DateTime? getEndOfWeek() {
-  // Gets the date of the end of the current week
-  DateTime now = DateTime.now();
-  int daysUntilSunday = DateTime.sunday - now.weekday;
-  return now.add(Duration(days: daysUntilSunday));
-}
