@@ -89,11 +89,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
               : LoginWidget(),
         ),
         FFRoute(
-          name: LoginWidget.routeName,
-          path: LoginWidget.routePath,
-          builder: (context, params) => LoginWidget(),
-        ),
-        FFRoute(
           name: GatherNPSWidget.routeName,
           path: GatherNPSWidget.routePath,
           builder: (context, params) => GatherNPSWidget(
@@ -112,11 +107,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
                     initialPage: 'Profile',
                     page: ProfileWidget(),
                   )),
-        FFRoute(
-          name: SignUpWidget.routeName,
-          path: SignUpWidget.routePath,
-          builder: (context, params) => SignUpWidget(),
-        ),
         FFRoute(
           name: DisplayNPSTEMPWidget.routeName,
           path: DisplayNPSTEMPWidget.routePath,
@@ -165,7 +155,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
                 : NavBarPage(
                     initialPage: 'GroupEvents',
                     page: GroupEventsWidget(),
-                  ))
+                  )),
+        FFRoute(
+          name: LoginWidget.routeName,
+          path: LoginWidget.routePath,
+          builder: (context, params) => LoginWidget(),
+        ),
+        FFRoute(
+          name: SignUpWidget.routeName,
+          path: SignUpWidget.routePath,
+          builder: (context, params) => SignUpWidget(),
+        )
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
 

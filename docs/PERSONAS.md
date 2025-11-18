@@ -1,4 +1,0 @@
-- ## [Internship Student](https://docs.google.com/presentation/d/1sE_0nehbEA7ia58VyEqvdS0h_lVNBqunDDlqu973pow/edit?slide=id.g368d9bc124d_4_0#slide=id.g368d9bc124d_4_0)
-- ## [High School Student](https://docs.google.com/presentation/d/1sE_0nehbEA7ia58VyEqvdS0h_lVNBqunDDlqu973pow/edit?slide=id.g368d9bc124d_0_5#slide=id.g368d9bc124d_0_5)
-- ## [College Student](https://docs.google.com/presentation/d/1sE_0nehbEA7ia58VyEqvdS0h_lVNBqunDDlqu973pow/edit?slide=id.g368d9bc124d_0_10#slide=id.g368d9bc124d_0_10)
-- ## [Educator](https://docs.google.com/presentation/d/1sE_0nehbEA7ia58VyEqvdS0h_lVNBqunDDlqu973pow/edit?slide=id.g368d9bc124d_0_15#slide=id.g368d9bc124d_0_15)
