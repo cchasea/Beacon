@@ -1,4 +1,4 @@
-### <link to template slide> US1: User Account Creation
+### [*US1: User Account Creation*](https://docs.google.com/presentation/d/1zZL9_djVzjCTwPoN89lRShasDebqRDu6CSP1OU9zORY/edit?usp=sharing)
 
 ### [*US2: User Login*](https://docs.google.com/presentation/d/1tXphTP1iwEbCMm-1BJhBUWsUmK740Zrco_wHJvc-UnE/edit?usp=sharing)
 
