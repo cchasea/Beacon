@@ -1,4 +1,4 @@
-package com.mycompany.campuslifeorganizer;
+package com.uricsc305.Beacon;
 
 import androidx.test.rule.ActivityTestRule;
 import dev.flutter.plugins.integration_test.FlutterTestRunner;

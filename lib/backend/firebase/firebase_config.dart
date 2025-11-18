@@ -10,7 +10,8 @@ Future initFirebase() async {
             projectId: "campus-life-organizer-sjgd9s",
             storageBucket: "campus-life-organizer-sjgd9s.firebasestorage.app",
             messagingSenderId: "419464159221",
-            appId: "1:419464159221:web:a0987358833bc7e8dc8abc"));
+            appId: "1:419464159221:web:a0987358833bc7e8dc8abc",
+            measurementId: "G-CXV1GJBDMW"));
   } else {
     await Firebase.initializeApp();
   }

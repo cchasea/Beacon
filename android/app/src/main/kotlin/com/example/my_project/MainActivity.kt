@@ -1,4 +1,4 @@
-package com.mycompany.campuslifeorganizer
+package com.uricsc305.Beacon
 
 import io.flutter.embedding.android.FlutterActivity
 
