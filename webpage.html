@@ -1,0 +1,539 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Beacon - Your All-in-One Calendar Companion</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Header */
+        header {
+            background-color: #3e7bfa;
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+        }
+
+        nav ul {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            transition: opacity 0.3s;
+        }
+
+        nav a:hover {
+            opacity: 0.8;
+        }
+
+        /* Hero Section */
+        .hero {
+            background: linear-gradient(135deg, #3e7bfa 0%, #80a6e3 100%);
+            color: white;
+            padding: 8rem 2rem 4rem;
+            text-align: center;
+            margin-top: 60px;
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .hero p {
+            font-size: 1.3rem;
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .cta-button {
+            display: inline-block;
+            background-color: white;
+            color: #3e7bfa;
+            padding: 1rem 2.5rem;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            font-size: 1.1rem;
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .cta-button:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+        }
+
+        /* Container */
+        .container {
+            background-color: aliceblue;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 4rem 2rem;
+        }
+
+        /* Who Is It For Section */
+        .who-section {
+            background-color: #f8f9fa;
+            text-align: center;
+        }
+
+        .who-section h2 {
+            color: #3e7bfa;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .who-section p {
+            font-size: 1.2rem;
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto 2rem;
+        }
+
+        .user-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .user-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+
+        .user-card h3 {
+            color: #3e7bfa;
+            margin-bottom: 0.5rem;
+        }
+
+        /* Features Section */
+        .features {
+            background-color: white;
+        }
+
+        .features h2 {
+            color: #3e7bfa;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: #f8f9fa;
+            padding: 2rem;
+            border-radius: 10px;
+            border-left: 4px solid #3e7bfa;
+            transition: transform 0.3s;
+        }
+
+        .feature-card:hover {
+            transform: translateX(10px);
+        }
+
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .feature-card h3 {
+            color: #3e7bfa;
+            margin-bottom: 1rem;
+        }
+
+        /* How to Navigate Section */
+        .navigate {
+            background-color: #f8f9fa;
+        }
+
+        .navigate h2 {
+            color: #3e7bfa;
+            font-size: 2.5rem;
+            text-align: center;
+            margin-bottom: 1rem;
+        }
+
+        .navigate > .container > p {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #555;
+            margin-bottom: 3rem;
+        }
+
+        .walkthrough {
+            display: flex;
+            flex-direction: column;
+            gap: 4rem;
+        }
+
+        .walkthrough-step {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .walkthrough-step:nth-child(even) {
+            direction: rtl;
+        }
+
+        .walkthrough-step:nth-child(even) > * {
+            direction: ltr;
+        }
+
+        .step-content {
+            padding: 2rem;
+        }
+
+        .step-number {
+            background-color: #3e7bfa;
+            color: white;
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.8rem;
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+
+        .step-content h3 {
+            color: #3e7bfa;
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .step-content p {
+            font-size: 1.1rem;
+            color: #555;
+            line-height: 1.8;
+        }
+
+        .screenshot-container {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .screenshot-container img {
+            max-width: 100%;
+            height: auto;
+            border-radius: 10px;
+            box-shadow: 0 3px 15px rgba(62, 123, 250, 0.3);
+        }
+
+        .multi-screenshot {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .multi-screenshot img {
+            max-width: 45%;
+            height: auto;
+        }
+
+        /* CTA Section */
+        .final-cta {
+            background: linear-gradient(135deg, #3e7bfa 0%, #80a6e3 100%);
+            color: white;
+            text-align: center;
+        }
+
+        .final-cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .final-cta p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2a2a2a;
+            color: white;
+            text-align: center;
+            padding: 2rem;
+        }
+
+        /* Responsive */
+        @media (max-width: 968px) {
+            .walkthrough-step {
+                grid-template-columns: 1fr;
+            }
+
+            .walkthrough-step:nth-child(even) {
+                direction: ltr;
+            }
+
+            .multi-screenshot img {
+                max-width: 100%;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2rem;
+            }
+
+            .hero p {
+                font-size: 1rem;
+            }
+
+            nav ul {
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .logo {
+                font-size: 1.5rem;
+            }
+
+            .features h2, .navigate h2, .who-section h2 {
+                font-size: 2rem;
+            }
+
+            .step-content h3 {
+                font-size: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <nav>
+            <div class="logo"><img src="C:\Users\namei\OneDrive\Desktop\Beacon_Logo.png" width="30" height="30"> Beacon</div>
+            <ul>
+                <li><a href="#audience">Audience</a></li>
+                <li><a href="#features">Features</a></li>
+                <li><a href="#navigate">How to Use</a></li>
+                <li><a href="#download">Download</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Never Miss a Deadline Again</h1>
+        <p>Beacon is your all-in-one academic and personal calendar app designed to keep you organized, connected, and on track.</p>
+        <a href="#download" class="cta-button">Get Started</a>
+    </section>
+
+    <!-- Who Is It For Section -->
+    <section class="audience-section" id="audience">
+        <div class="container">
+            <h2>What is the Target Audience for our App?</h2>
+            <p>Beacon is designed for anyone, (not just students!) who want to stay organized and never miss important deadlines or events.</p>
+            <div class="user-cards">
+                <div class="user-card">
+                    <h3>College Students</h3>
+                    <p>Manage multiple courses, assignments, and exams all in one place.</p>
+                </div>
+                <div class="user-card">
+                    <h3>Study Groups</h3>
+                    <p>Share calendar events with classmates and coordinate study sessions effortlessly.</p>
+                </div>
+                <div class="user-card">
+                    <h3>Educators</h3>
+                    <p>Keep track of your students' assignment deadlines alongside personal teaching tasks.</p>
+                </div>
+                <div class="user-card">
+                    <h3>General Users</h3>
+                    <p>Maintain order in life with easy to view events and tasks on the daily.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="container">
+            <h2>Features That Make You Shine</h2>
+            <div class="feature-grid">
+                <div class="feature-card">
+                    <!-- <div class="feature-icon">📅</div> -->
+                    <h3> All your academic dates in one place.</h3>
+                    <p>Add your own deadlines or import directly from your Learning Management System (Brightspace, Canvas, Blackboard, etc.).</p>
+                </div>
+                <div class="feature-card">
+                    <!-- <div class="feature-icon">🔔</div> -->
+                    <h3>Upcoming Events & Deadlines</h3>
+                    <p>Get a clear view of what's coming up next.</p>
+                </div>
+                <div class="feature-card">
+                    <!-- <div class="feature-icon">👥</div> -->
+                    <h3>Share Events and Assignments</h3>
+                    <p>Connect with friends, share your calendar, and see their schedules. Perfect for group projects, study sessions, and coordinating hangouts.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How to Navigate Section -->
+    <section class="navigate" id="navigate">
+        <div class="container">
+            <h2>How to Use Beacon</h2>
+            <p>Follow these simple steps to get started with our app!</p>
+            
+            <div class="walkthrough">
+                <!-- Step 1: Sign Up -->
+                <div class="walkthrough-step">
+                    <div class="step-content">
+                        <div class="step-number">1</div>
+                        <h3>Create Your Account</h3>
+                        <p>Download Beacon and sign up with your email and password. Set up your profile by adding basic information to personalize your experience.</p>
+                    </div>
+                    <div class="screenshot-container">
+                        <div class="multi-screenshot">
+                            <img src="C:\Users\namei\OneDrive\Pictures\Screenshots\login_screen.png" alt="Login Screen" style="max-height: 400px;">
+                            <img src="C:\Users\namei\OneDrive\Pictures\Screenshots\signup_screen.png" alt="Sign Up Screen" style="max-height: 400px;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 2: Set Up Profile & Courses -->
+                <div class="walkthrough-step">
+                    <div class="step-content">
+                        <div class="step-number">2</div>
+                        <h3>Add Your Deadlines</h3>
+                        <p>After your profile is all set up, move on over to our calendar page to start adding deadlines and events. Enter course names, assignment due dates, exam schedules, and any additional important events.</p>
+                    </div>
+                    <div class="screenshot-container">
+                        <img src="C:\Users\namei\OneDrive\Pictures\Screenshots\profile_screen.png" alt="Profile Screen with Courses" style="max-height: 450px;">
+                    </div>
+                </div>
+
+                <!-- Step 3: View Home & Upcoming -->
+                <div class="walkthrough-step">
+                    <div class="step-content">
+                        <div class="step-number">3</div>
+                        <h3>Check Your Dashboard</h3>
+                        <p>The home screen welcomes you and shows your upcoming deadlines at a glance. Navigate through your schedule to see what's going on today, what is coming up, and what has passed.</p>
+                    </div>
+                    <div class="screenshot-container">
+                        <img src="C:\Users\namei\OneDrive\Pictures\Screenshots\homepage.png" alt="Home Dashboard" style="max-height: 450px;">
+                    </div>
+                </div>
+
+                <!-- Step 4: Calendar View -->
+                <div class="walkthrough-step">
+                    <div class="step-content">
+                        <div class="step-number">4</div>
+                        <h3>Navigate Your Calendar</h3>
+                        <p>Use the calendar view to see all your deadlines and events in a monthly format. Tap any date to see the listed information about assignments or events scheduled for that day.</p>
+                    </div>
+                    <div class="screenshot-container">
+                        <img src="C:\Users\namei\OneDrive\Pictures\Screenshots\calendar_screen.png" alt="Calendar View" style="max-height: 450px;">
+                    </div>
+                </div>
+
+                <!-- Step 5: Manage Events -->
+                <div class="walkthrough-step">
+                    <div class="step-content">
+                        <div class="step-number">5</div>
+                        <h3>Manage Your Events</h3>
+                        <p>View event details, edit deadlines, or delete events as needed. Keep your calendar up-to-date by managing your assignments and changing dates as needed.</p>
+                    </div>
+                    <div class="screenshot-container">
+                        <div class="multi-screenshot">
+                            <img src="C:\Users\namei\OneDrive\Pictures\Screenshots\event_details.png" alt="Event Details" style="max-height: 400px;">
+                            <img src="C:\Users\namei\OneDrive\Pictures\Screenshots\event_delete.png" alt="Delete Event Confirmation" style="max-height: 400px;">
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Step 6: Connect with Friends -->
+                <div class="walkthrough-step">
+                    <div class="step-content">
+                        <div class="step-number">6</div>
+                        <h3>Connect with Friends</h3>
+                        <p>Search for friends, send connection requests, and manage your friend list. Share assignments and events with friends for easier access to group activities.</p>
+                    </div>
+                    <div class="screenshot-container">
+                        <img src="C:\Users\namei\OneDrive\Pictures\Screenshots\friends_screen.png" alt="Groups and Friends Screen" style="max-height: 450px;">
+                    </div>
+                </div>
+
+                <!-- Step 7: Import LMS Calendar -->
+                <div class="walkthrough-step">
+                    <div class="step-content">
+                        <div class="step-number">7</div>
+                        <h3>Import from LMS</h3>
+                        <p>Save time by importing your calendar directly from Brightspace, Canvas, or other Learning Management Systems and all your course deadlines sync automatically!</p>
+                    </div>
+                    <div class="screenshot-container">
+                        <img src="C:\Users\namei\OneDrive\Pictures\Screenshots\brightspace_import.png" alt="Brightspace Import Screen" style="max-height: 450px;">
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Final CTA -->
+    <section class="final-cta" id="download">
+        <div class="container">
+            <h2>Ready to Get Organized?</h2>
+            <p>Join thousands of users who are already using Beacon to stay on top of both their academic and personal lives.</p>
+            <a href="#" class="cta-button">Download Beacon Now</a>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <p>&copy; 2024 Beacon. All rights reserved. | Stay organized. Stay connected. Stay ahead.</p>
+    </footer>
+</body>
+</html>
