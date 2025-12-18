@@ -1,6 +1,4 @@
-import '/flutter_flow/flutter_flow_calendar.dart';
 import '/flutter_flow/flutter_flow_util.dart';
-import '/index.dart';
 import 'event_details_widget.dart' show EventDetailsWidget;
 import 'package:flutter/material.dart';
 
@@ -15,27 +13,33 @@ class EventDetailsModel extends FlutterFlowModel<EventDetailsWidget> {
   FocusNode? nameTextfieldFocusNode;
   TextEditingController? nameTextfieldTextController;
   String? Function(BuildContext, String?)? nameTextfieldTextControllerValidator;
+  // State field(s) for sharedWith_SwitchListTile widget.
+  bool? sharedWithSwitchListTileValue;
   // State field(s) for selectedDate_TextField widget.
   FocusNode? selectedDateTextFieldFocusNode;
   TextEditingController? selectedDateTextFieldTextController;
   String? Function(BuildContext, String?)?
       selectedDateTextFieldTextControllerValidator;
-  // State field(s) for sharedWith_SwitchListTile widget.
-  bool? sharedWithSwitchListTileValue;
-  // State field(s) for Calendar widget.
-  DateTimeRange? calendarSelectedDay;
+  DateTime? datePicked1;
+  // State field(s) for startTime_textField widget.
+  FocusNode? startTimeTextFieldFocusNode;
+  TextEditingController? startTimeTextFieldTextController;
+  String? Function(BuildContext, String?)?
+      startTimeTextFieldTextControllerValidator;
+  DateTime? datePicked2;
+  // State field(s) for EndTime_textField widget.
+  FocusNode? endTimeTextFieldFocusNode;
+  TextEditingController? endTimeTextFieldTextController;
+  String? Function(BuildContext, String?)?
+      endTimeTextFieldTextControllerValidator;
+  DateTime? datePicked3;
   // State field(s) for TextField widget.
   FocusNode? textFieldFocusNode;
-  TextEditingController? textController3;
-  String? Function(BuildContext, String?)? textController3Validator;
+  TextEditingController? textController5;
+  String? Function(BuildContext, String?)? textController5Validator;
 
   @override
-  void initState(BuildContext context) {
-    calendarSelectedDay = DateTimeRange(
-      start: DateTime.now().startOfDay,
-      end: DateTime.now().endOfDay,
-    );
-  }
+  void initState(BuildContext context) {}
 
   @override
   void dispose() {
@@ -45,7 +49,13 @@ class EventDetailsModel extends FlutterFlowModel<EventDetailsWidget> {
     selectedDateTextFieldFocusNode?.dispose();
     selectedDateTextFieldTextController?.dispose();
 
+    startTimeTextFieldFocusNode?.dispose();
+    startTimeTextFieldTextController?.dispose();
+
+    endTimeTextFieldFocusNode?.dispose();
+    endTimeTextFieldTextController?.dispose();
+
     textFieldFocusNode?.dispose();
-    textController3?.dispose();
+    textController5?.dispose();
   }
 }

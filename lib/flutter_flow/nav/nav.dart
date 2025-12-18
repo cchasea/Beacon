@@ -89,9 +89,18 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
               : LoginWidget(),
         ),
         FFRoute(
-          name: LoginWidget.routeName,
-          path: LoginWidget.routePath,
-          builder: (context, params) => LoginWidget(),
+            name: ProfileWidget.routeName,
+            path: ProfileWidget.routePath,
+            builder: (context, params) => params.isEmpty
+                ? NavBarPage(initialPage: 'Profile')
+                : NavBarPage(
+                    initialPage: 'Profile',
+                    page: ProfileWidget(),
+                  )),
+        FFRoute(
+          name: DisplayNPSTEMPWidget.routeName,
+          path: DisplayNPSTEMPWidget.routePath,
+          builder: (context, params) => DisplayNPSTEMPWidget(),
         ),
         FFRoute(
           name: GatherNPSWidget.routeName,
@@ -104,36 +113,31 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
           ),
         ),
         FFRoute(
-            name: ProfileWidget.routeName,
-            path: ProfileWidget.routePath,
-            builder: (context, params) => params.isEmpty
-                ? NavBarPage(initialPage: 'Profile')
-                : NavBarPage(
-                    initialPage: 'Profile',
-                    page: ProfileWidget(),
-                  )),
+          name: LoginWidget.routeName,
+          path: LoginWidget.routePath,
+          builder: (context, params) => LoginWidget(),
+        ),
         FFRoute(
           name: SignUpWidget.routeName,
           path: SignUpWidget.routePath,
           builder: (context, params) => SignUpWidget(),
         ),
         FFRoute(
-          name: DisplayNPSTEMPWidget.routeName,
-          path: DisplayNPSTEMPWidget.routePath,
-          builder: (context, params) => DisplayNPSTEMPWidget(),
-        ),
+            name: ImportBrightspaceWidget.routeName,
+            path: ImportBrightspaceWidget.routePath,
+            builder: (context, params) => NavBarPage(
+                  initialPage: '',
+                  page: ImportBrightspaceWidget(),
+                )),
         FFRoute(
-          name: CalanderWidget.routeName,
-          path: CalanderWidget.routePath,
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'Calander')
-              : CalanderWidget(
-                  dayHasEvent: params.getParam(
-                    'dayHasEvent',
-                    ParamType.bool,
-                  ),
-                ),
-        ),
+            name: HomePageWidget.routeName,
+            path: HomePageWidget.routePath,
+            builder: (context, params) => params.isEmpty
+                ? NavBarPage(initialPage: 'HomePage')
+                : NavBarPage(
+                    initialPage: 'HomePage',
+                    page: HomePageWidget(),
+                  )),
         FFRoute(
           name: EventDetailsWidget.routeName,
           path: EventDetailsWidget.routePath,
@@ -149,14 +153,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
           ),
         ),
         FFRoute(
-            name: HomePageWidget.routeName,
-            path: HomePageWidget.routePath,
-            builder: (context, params) => params.isEmpty
-                ? NavBarPage(initialPage: 'HomePage')
-                : NavBarPage(
-                    initialPage: 'HomePage',
-                    page: HomePageWidget(),
-                  )),
+          name: CalendarWidget.routeName,
+          path: CalendarWidget.routePath,
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'Calendar')
+              : CalendarWidget(
+                  dayHasEvent: params.getParam(
+                    'dayHasEvent',
+                    ParamType.bool,
+                  ),
+                ),
+        ),
         FFRoute(
             name: GroupEventsWidget.routeName,
             path: GroupEventsWidget.routePath,

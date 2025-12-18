@@ -22,3 +22,31 @@ DateTime? getDate() {
       milliseconds: DateTime.now().millisecond,
       microseconds: DateTime.now().microsecond));
 }
+
+DateTime getStartOfToday() {
+  final now = DateTime.now();
+  return DateTime(now.year, now.month, now.day);
+}
+
+DateTime getStartOfTomorrow() {
+  final now = DateTime.now();
+  return DateTime(now.year, now.month, now.day + 1);
+}
+
+DateTime getJustBeforeToday() {
+  final now = DateTime.now();
+  return DateTime(now.year, now.month, now.day - 1, 23, 59, 59, 999);
+}
+
+DateTime getJustBeforeTomorrow() {
+  final now = DateTime.now();
+  return DateTime(now.year, now.month, now.day, 23, 59, 59, 999);
+}
+
+DateTime getJustBeforeDate(DateTime date) {
+  return DateTime(date.year, date.month, date.day - 1, 23, 59, 59, 999);
+}
+
+DateTime getNextDay(DateTime date) {
+  return DateTime(date.year, date.month, date.day + 1);
+}

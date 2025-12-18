@@ -83,7 +83,7 @@ class _DeleteEventWidgetState extends State<DeleteEventWidget> {
                   Navigator.pop(context);
                   logFirebaseEvent('Delete_button_navigate_to');
 
-                  context.goNamed(CalanderWidget.routeName);
+                  context.goNamed(CalendarWidget.routeName);
                 },
                 text: 'Delete',
                 options: FFButtonOptions(

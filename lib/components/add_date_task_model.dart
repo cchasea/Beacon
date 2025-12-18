@@ -1,6 +1,7 @@
-import '/flutter_flow/flutter_flow_calendar.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/form_field_controller.dart';
 import 'add_date_task_widget.dart' show AddDateTaskWidget;
+import 'package:expandable/expandable.dart';
 import 'package:flutter/material.dart';
 
 class AddDateTaskModel extends FlutterFlowModel<AddDateTaskWidget> {
@@ -11,15 +12,34 @@ class AddDateTaskModel extends FlutterFlowModel<AddDateTaskWidget> {
   TextEditingController? titleTextFieldTextController;
   String? Function(BuildContext, String?)?
       titleTextFieldTextControllerValidator;
-  // State field(s) for dateChoosen_TextField widget.
-  FocusNode? dateChoosenTextFieldFocusNode;
-  TextEditingController? dateChoosenTextFieldTextController;
-  String? Function(BuildContext, String?)?
-      dateChoosenTextFieldTextControllerValidator;
+  // State field(s) for eventVStask_choiceChips widget.
+  FormFieldController<List<String>>? eventVStaskChoiceChipsValueController;
+  String? get eventVStaskChoiceChipsValue =>
+      eventVStaskChoiceChipsValueController?.value?.firstOrNull;
+  set eventVStaskChoiceChipsValue(String? val) =>
+      eventVStaskChoiceChipsValueController?.value = val != null ? [val] : [];
   // State field(s) for SwitchListTile widget.
   bool? switchListTileValue;
-  // State field(s) for Calendar widget.
-  DateTimeRange? calendarSelectedDay;
+  // State field(s) for ExpandableFriendsList widget.
+  late ExpandableController expandableFriendsListExpandableController;
+
+  // State field(s) for date_textField widget.
+  FocusNode? dateTextFieldFocusNode;
+  TextEditingController? dateTextFieldTextController;
+  String? Function(BuildContext, String?)? dateTextFieldTextControllerValidator;
+  DateTime? datePicked1;
+  // State field(s) for startTime_TextField widget.
+  FocusNode? startTimeTextFieldFocusNode;
+  TextEditingController? startTimeTextFieldTextController;
+  String? Function(BuildContext, String?)?
+      startTimeTextFieldTextControllerValidator;
+  DateTime? datePicked2;
+  // State field(s) for endTime_TextField widget.
+  FocusNode? endTimeTextFieldFocusNode;
+  TextEditingController? endTimeTextFieldTextController;
+  String? Function(BuildContext, String?)?
+      endTimeTextFieldTextControllerValidator;
+  DateTime? datePicked3;
   // State field(s) for details_textField widget.
   FocusNode? detailsTextFieldFocusNode;
   TextEditingController? detailsTextFieldTextController;
@@ -27,20 +47,22 @@ class AddDateTaskModel extends FlutterFlowModel<AddDateTaskWidget> {
       detailsTextFieldTextControllerValidator;
 
   @override
-  void initState(BuildContext context) {
-    calendarSelectedDay = DateTimeRange(
-      start: DateTime.now().startOfDay,
-      end: DateTime.now().endOfDay,
-    );
-  }
+  void initState(BuildContext context) {}
 
   @override
   void dispose() {
     titleTextFieldFocusNode?.dispose();
     titleTextFieldTextController?.dispose();
 
-    dateChoosenTextFieldFocusNode?.dispose();
-    dateChoosenTextFieldTextController?.dispose();
+    expandableFriendsListExpandableController.dispose();
+    dateTextFieldFocusNode?.dispose();
+    dateTextFieldTextController?.dispose();
+
+    startTimeTextFieldFocusNode?.dispose();
+    startTimeTextFieldTextController?.dispose();
+
+    endTimeTextFieldFocusNode?.dispose();
+    endTimeTextFieldTextController?.dispose();
 
     detailsTextFieldFocusNode?.dispose();
     detailsTextFieldTextController?.dispose();

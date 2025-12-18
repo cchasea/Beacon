@@ -40,12 +40,18 @@ class FriendRequestsRecord extends FirestoreRecord {
   DateTime? get createdAt => _createdAt;
   bool hasCreatedAt() => _createdAt != null;
 
+  // "fromUserName" field.
+  String? _fromUserName;
+  String get fromUserName => _fromUserName ?? '';
+  bool hasFromUserName() => _fromUserName != null;
+
   void _initializeFields() {
     _test = castToType<int>(snapshotData['test']);
     _fromUser = snapshotData['fromUser'] as String?;
     _toUser = snapshotData['toUser'] as String?;
     _status = snapshotData['status'] as String?;
     _createdAt = snapshotData['createdAt'] as DateTime?;
+    _fromUserName = snapshotData['fromUserName'] as String?;
   }
 
   static CollectionReference get collection =>
@@ -88,6 +94,7 @@ Map<String, dynamic> createFriendRequestsRecordData({
   String? toUser,
   String? status,
   DateTime? createdAt,
+  String? fromUserName,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -96,6 +103,7 @@ Map<String, dynamic> createFriendRequestsRecordData({
       'toUser': toUser,
       'status': status,
       'createdAt': createdAt,
+      'fromUserName': fromUserName,
     }.withoutNulls,
   );
 
@@ -112,12 +120,19 @@ class FriendRequestsRecordDocumentEquality
         e1?.fromUser == e2?.fromUser &&
         e1?.toUser == e2?.toUser &&
         e1?.status == e2?.status &&
-        e1?.createdAt == e2?.createdAt;
+        e1?.createdAt == e2?.createdAt &&
+        e1?.fromUserName == e2?.fromUserName;
   }
 
   @override
-  int hash(FriendRequestsRecord? e) => const ListEquality()
-      .hash([e?.test, e?.fromUser, e?.toUser, e?.status, e?.createdAt]);
+  int hash(FriendRequestsRecord? e) => const ListEquality().hash([
+        e?.test,
+        e?.fromUser,
+        e?.toUser,
+        e?.status,
+        e?.createdAt,
+        e?.fromUserName
+      ]);
 
   @override
   bool isValidKey(Object? o) => o is FriendRequestsRecord;

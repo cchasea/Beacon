@@ -1,13 +1,14 @@
 import '/backend/backend.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
+import '/flutter_flow/custom_functions.dart' as functions;
 import 'package:flutter/material.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'event_card_model.dart';
-export 'event_card_model.dart';
+import 'event_card_larger_model.dart';
+export 'event_card_larger_model.dart';
 
-class EventCardWidget extends StatefulWidget {
-  const EventCardWidget({
+class EventCardLargerWidget extends StatefulWidget {
+  const EventCardLargerWidget({
     super.key,
     required this.eventsDoc,
   });
@@ -15,11 +16,11 @@ class EventCardWidget extends StatefulWidget {
   final CalendarEventRecord? eventsDoc;
 
   @override
-  State<EventCardWidget> createState() => _EventCardWidgetState();
+  State<EventCardLargerWidget> createState() => _EventCardLargerWidgetState();
 }
 
-class _EventCardWidgetState extends State<EventCardWidget> {
-  late EventCardModel _model;
+class _EventCardLargerWidgetState extends State<EventCardLargerWidget> {
+  late EventCardLargerModel _model;
 
   @override
   void setState(VoidCallback callback) {
@@ -30,7 +31,7 @@ class _EventCardWidgetState extends State<EventCardWidget> {
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => EventCardModel());
+    _model = createModel(context, () => EventCardLargerModel());
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
   }
@@ -46,7 +47,7 @@ class _EventCardWidgetState extends State<EventCardWidget> {
   Widget build(BuildContext context) {
     return Container(
       width: double.infinity,
-      height: 30.0,
+      height: 50.0,
       decoration: BoxDecoration(
         color: FlutterFlowTheme.of(context).secondary,
         borderRadius: BorderRadius.circular(24.0),
@@ -99,6 +100,9 @@ class _EventCardWidgetState extends State<EventCardWidget> {
                         fontStyle:
                             FlutterFlowTheme.of(context).labelLarge.fontStyle,
                       ),
+                      color: widget.eventsDoc!.date! < functions.getDate()!
+                          ? FlutterFlowTheme.of(context).error
+                          : FlutterFlowTheme.of(context).tertiary,
                       fontSize: 15.0,
                       letterSpacing: 0.0,
                       fontWeight:
@@ -135,7 +139,7 @@ class _EventCardWidgetState extends State<EventCardWidget> {
                                 () => _model.checkboxValue = newValue!);
                             if (newValue!) {
                               logFirebaseEvent(
-                                  'EVENT_CARD_Checkbox_06bx5vbw_ON_TOGGLE_O');
+                                  'EVENT_CARD_LARGER_Checkbox_mgezcvuc_ON_T');
                               logFirebaseEvent('Checkbox_backend_call');
 
                               await widget.eventsDoc!.reference
@@ -144,7 +148,7 @@ class _EventCardWidgetState extends State<EventCardWidget> {
                               ));
                             } else {
                               logFirebaseEvent(
-                                  'EVENT_CARD_Checkbox_06bx5vbw_ON_TOGGLE_O');
+                                  'EVENT_CARD_LARGER_Checkbox_mgezcvuc_ON_T');
                               logFirebaseEvent('Checkbox_backend_call');
 
                               await widget.eventsDoc!.reference
