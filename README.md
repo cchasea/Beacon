@@ -16,9 +16,8 @@ Beacon addresses this by merging everything into one place and offering AI-power
 
 Key integrations:
 
-Google Calendar API for event synchronization
 
-Brightspace/Canvas APIs for course deadlines and assignment data
+Brightspace APIs for course deadlines and assignment data
 
 Firebase for secure authentication and data storage
 
@@ -28,8 +27,6 @@ FlutterFlow for cross-platform app deployment
 
 LMS (Learning Management System): Platforms like Brightspace and Canvas used for course management.
 
-AI Study Block: A suggested study interval generated using workload and schedule data.
-
 Freemium Model: Base app is free, with optional paid campus-wide or productivity upgrade features.
 
 FlutterFlow: A low-code platform for building web and mobile apps using Google’s Flutter framework.
@@ -38,7 +35,6 @@ For further information:
 
 Brightspace API Documentation
 
-Google Calendar API Overview
 
 Firebase Documentation
 
@@ -47,9 +43,6 @@ FlutterFlow Platform
 4. Example Usage
 // Example: Retrieve assignment deadlines from Brightspace API
 final assignments = await BrightspaceService.fetchAssignments(userId);
-
-// Example: Generate AI-powered study block suggestion
-final studyPlan = AIPlanner.suggestBlocks(assignments, availableHours: 4);
 
 
 This snippet demonstrates the logic flow for syncing user assignments and generating recommended study plans.
@@ -88,15 +81,11 @@ Backend: Firebase Cloud Functions
 
 Database: Firestore
 
-Integrations: Google Calendar API, Brightspace/Canvas API
-
-AI Layer: OpenAI API (task prioritization and study block planning)
+Integrations: Brightspace/Canvas API
 
 Core Features:
 
 Centralized calendar sync across multiple systems
-
-AI-driven scheduling and reminder generation
 
 Group project tools: shared task lists, meeting scheduler, integrated chat
 
@@ -122,7 +111,7 @@ Readers can skim for quick context or read deeply for full implementation detail
 
 Currently in prototype (MVP) stage with limited live deployment.
 
-LMS integration requires institutional API keys or student login authorization.
+LMS integration requires institutional student login authorization.
 
 Future updates will expand support for additional platforms and advanced analytics.
 
