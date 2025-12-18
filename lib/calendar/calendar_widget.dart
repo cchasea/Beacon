@@ -7,46 +7,50 @@ import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
+import '/flutter_flow/custom_functions.dart' as functions;
 import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
-import 'calander_model.dart';
-export 'calander_model.dart';
+import 'calendar_model.dart';
+export 'calendar_model.dart';
 
-class CalanderWidget extends StatefulWidget {
-  const CalanderWidget({
+class CalendarWidget extends StatefulWidget {
+  const CalendarWidget({
     super.key,
     bool? dayHasEvent,
   }) : this.dayHasEvent = dayHasEvent ?? false;
 
   final bool dayHasEvent;
 
-  static String routeName = 'Calander';
-  static String routePath = '/calander';
+  static String routeName = 'Calendar';
+  static String routePath = '/calendar';
 
   @override
-  State<CalanderWidget> createState() => _CalanderWidgetState();
+  State<CalendarWidget> createState() => _CalendarWidgetState();
 }
 
-class _CalanderWidgetState extends State<CalanderWidget> {
-  late CalanderModel _model;
+class _CalendarWidgetState extends State<CalendarWidget> {
+  late CalendarModel _model;
 
   final scaffoldKey = GlobalKey<ScaffoldState>();
 
   @override
   void initState() {
     super.initState();
-    _model = createModel(context, () => CalanderModel());
+    _model = createModel(context, () => CalendarModel());
 
-    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Calander'});
+    logFirebaseEvent('screen_view', parameters: {'screen_name': 'Calendar'});
     // On page load action.
     SchedulerBinding.instance.addPostFrameCallback((_) async {
-      logFirebaseEvent('CALANDER_PAGE_Calander_ON_INIT_STATE');
-      logFirebaseEvent('Calander_custom_action');
+      logFirebaseEvent('CALENDAR_PAGE_Calendar_ON_INIT_STATE');
+      logFirebaseEvent('Calendar_custom_action');
       await actions.applyRemoteConfigTheme(
         context,
       );
+      logFirebaseEvent('Calendar_update_page_state');
+      _model.choosenDay = getCurrentTimestamp;
+      safeSetState(() {});
     });
 
     WidgetsBinding.instance.addPostFrameCallback((_) => safeSetState(() {}));
@@ -94,7 +98,7 @@ class _CalanderWidgetState extends State<CalanderWidget> {
             FFButtonWidget(
               key: ValueKey('CalendarAdd'),
               onPressed: () async {
-                logFirebaseEvent('CALANDER_PAGE_addEvent_button_ON_TAP');
+                logFirebaseEvent('CALENDAR_PAGE_addEvent_button_ON_TAP');
                 logFirebaseEvent('addEvent_button_bottom_sheet');
                 await showModalBottomSheet(
                   isScrollControlled: true,
@@ -177,9 +181,17 @@ class _CalanderWidgetState extends State<CalanderWidget> {
                   weekFormat: false,
                   weekStartsMonday: false,
                   rowHeight: 50.0,
-                  onChange: (DateTimeRange? newSelectedDate) {
-                    safeSetState(
-                        () => _model.calendarSelectedDay = newSelectedDate);
+                  onChange: (DateTimeRange? newSelectedDate) async {
+                    if (_model.calendarSelectedDay == newSelectedDate) {
+                      return;
+                    }
+                    _model.calendarSelectedDay = newSelectedDate;
+                    logFirebaseEvent(
+                        'CALENDAR_Calendar_ssyundny_ON_DATE_SELEC');
+                    logFirebaseEvent('Calendar_update_page_state');
+                    _model.choosenDay = _model.calendarSelectedDay?.start;
+                    safeSetState(() {});
+                    safeSetState(() {});
                   },
                   titleStyle: FlutterFlowTheme.of(context).titleLarge.override(
                         font: GoogleFonts.outfit(
@@ -216,7 +228,7 @@ class _CalanderWidgetState extends State<CalanderWidget> {
                           fontStyle:
                               FlutterFlowTheme.of(context).bodyMedium.fontStyle,
                         ),
-                        color: FlutterFlowTheme.of(context).alternate,
+                        color: FlutterFlowTheme.of(context).tertiary,
                         fontSize: 18.0,
                         letterSpacing: 0.0,
                         fontWeight: FontWeight.normal,
@@ -247,7 +259,7 @@ class _CalanderWidgetState extends State<CalanderWidget> {
                               .labelMedium
                               .fontStyle,
                         ),
-                        color: FlutterFlowTheme.of(context).tertiary,
+                        color: Color(0x83000000),
                         fontSize: 18.0,
                         letterSpacing: 0.0,
                         fontWeight: FontWeight.normal,
@@ -256,31 +268,41 @@ class _CalanderWidgetState extends State<CalanderWidget> {
                       ),
                 ),
               ),
-              Container(
-                decoration: BoxDecoration(),
-                child: Text(
-                  'Upcoming',
-                  style: FlutterFlowTheme.of(context).headlineMedium.override(
-                        font: GoogleFonts.roboto(
-                          fontWeight: FlutterFlowTheme.of(context)
-                              .headlineMedium
-                              .fontWeight,
-                          fontStyle: FlutterFlowTheme.of(context)
-                              .headlineMedium
-                              .fontStyle,
-                        ),
-                        letterSpacing: 0.0,
-                        fontWeight: FlutterFlowTheme.of(context)
+              Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Expanded(
+                    child: Align(
+                      alignment: AlignmentDirectional(0.0, 0.0),
+                      child: Text(
+                        dateTimeFormat("MMMEd", _model.choosenDay),
+                        style: FlutterFlowTheme.of(context)
                             .headlineMedium
-                            .fontWeight,
-                        fontStyle: FlutterFlowTheme.of(context)
-                            .headlineMedium
-                            .fontStyle,
+                            .override(
+                              font: GoogleFonts.roboto(
+                                fontWeight: FlutterFlowTheme.of(context)
+                                    .headlineMedium
+                                    .fontWeight,
+                                fontStyle: FlutterFlowTheme.of(context)
+                                    .headlineMedium
+                                    .fontStyle,
+                              ),
+                              letterSpacing: 0.0,
+                              fontWeight: FlutterFlowTheme.of(context)
+                                  .headlineMedium
+                                  .fontWeight,
+                              fontStyle: FlutterFlowTheme.of(context)
+                                  .headlineMedium
+                                  .fontStyle,
+                            ),
                       ),
-                ),
+                    ),
+                  ),
+                ],
               ),
               Container(
-                height: 200.0,
+                height: 260.0,
                 decoration: BoxDecoration(),
                 child: StreamBuilder<List<CalendarEventRecord>>(
                   stream: queryCalendarEventRecord(
@@ -289,7 +311,16 @@ class _CalanderWidgetState extends State<CalanderWidget> {
                           'User',
                           isEqualTo: currentUserReference,
                         )
-                        .orderBy('Date'),
+                        .where(
+                          'Date',
+                          isGreaterThan: functions.getJustBeforeDate(
+                              _model.calendarSelectedDay!.start),
+                        )
+                        .where(
+                          'Date',
+                          isLessThan: functions
+                              .getNextDay(_model.calendarSelectedDay!.start),
+                        ),
                   ),
                   builder: (context, snapshot) {
                     // Customize what your widget looks like when it's loading.
@@ -325,7 +356,7 @@ class _CalanderWidgetState extends State<CalanderWidget> {
                           highlightColor: Colors.transparent,
                           onTap: () async {
                             logFirebaseEvent(
-                                'CALANDER_PAGE_Container_0g9chkfv_ON_TAP');
+                                'CALENDAR_PAGE_Container_0g9chkfv_ON_TAP');
                             logFirebaseEvent('event_card_navigate_to');
 
                             context.pushNamed(

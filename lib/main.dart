@@ -156,8 +156,8 @@ class _NavBarPageState extends State<NavBarPage> {
   Widget build(BuildContext context) {
     final tabs = {
       'Profile': ProfileWidget(),
-      'Calander': CalanderWidget(),
       'HomePage': HomePageWidget(),
+      'Calendar': CalendarWidget(),
       'GroupEvents': GroupEventsWidget(),
     };
     final currentIndex = tabs.keys.toList().indexOf(_currentPageName);
@@ -218,16 +218,14 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  currentIndex == 1
-                      ? Icons.date_range_rounded
-                      : Icons.date_range_outlined,
+                  Icons.home,
                   color: currentIndex == 1
                       ? FlutterFlowTheme.of(context).primary
                       : FlutterFlowTheme.of(context).tertiary,
-                  size: currentIndex == 1 ? 32.0 : 24.0,
+                  size: 24.0,
                 ),
                 Text(
-                  'Calendar',
+                  'Home',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 1
@@ -244,14 +242,14 @@ class _NavBarPageState extends State<NavBarPage> {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  Icons.home,
+                  Icons.date_range_outlined,
                   color: currentIndex == 2
                       ? FlutterFlowTheme.of(context).primary
                       : FlutterFlowTheme.of(context).tertiary,
                   size: 24.0,
                 ),
                 Text(
-                  'Home',
+                  'Calendar',
                   overflow: TextOverflow.ellipsis,
                   style: TextStyle(
                     color: currentIndex == 2

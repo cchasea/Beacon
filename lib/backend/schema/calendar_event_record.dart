@@ -51,6 +51,21 @@ class CalendarEventRecord extends FirestoreRecord {
   DocumentReference? get user => _user;
   bool hasUser() => _user != null;
 
+  // "isEvent" field.
+  bool? _isEvent;
+  bool get isEvent => _isEvent ?? false;
+  bool hasIsEvent() => _isEvent != null;
+
+  // "StartTime" field.
+  DateTime? _startTime;
+  DateTime? get startTime => _startTime;
+  bool hasStartTime() => _startTime != null;
+
+  // "EndTime" field.
+  DateTime? _endTime;
+  DateTime? get endTime => _endTime;
+  bool hasEndTime() => _endTime != null;
+
   void _initializeFields() {
     _name = snapshotData['Name'] as String?;
     _details = snapshotData['Details'] as String?;
@@ -59,6 +74,9 @@ class CalendarEventRecord extends FirestoreRecord {
     _completed = snapshotData['Completed'] as bool?;
     _date = snapshotData['Date'] as DateTime?;
     _user = snapshotData['User'] as DocumentReference?;
+    _isEvent = snapshotData['isEvent'] as bool?;
+    _startTime = snapshotData['StartTime'] as DateTime?;
+    _endTime = snapshotData['EndTime'] as DateTime?;
   }
 
   static CollectionReference get collection =>
@@ -102,6 +120,9 @@ Map<String, dynamic> createCalendarEventRecordData({
   bool? completed,
   DateTime? date,
   DocumentReference? user,
+  bool? isEvent,
+  DateTime? startTime,
+  DateTime? endTime,
 }) {
   final firestoreData = mapToFirestore(
     <String, dynamic>{
@@ -111,6 +132,9 @@ Map<String, dynamic> createCalendarEventRecordData({
       'Completed': completed,
       'Date': date,
       'User': user,
+      'isEvent': isEvent,
+      'StartTime': startTime,
+      'EndTime': endTime,
     }.withoutNulls,
   );
 
@@ -130,7 +154,10 @@ class CalendarEventRecordDocumentEquality
         listEquality.equals(e1?.sharedWith, e2?.sharedWith) &&
         e1?.completed == e2?.completed &&
         e1?.date == e2?.date &&
-        e1?.user == e2?.user;
+        e1?.user == e2?.user &&
+        e1?.isEvent == e2?.isEvent &&
+        e1?.startTime == e2?.startTime &&
+        e1?.endTime == e2?.endTime;
   }
 
   @override
@@ -141,7 +168,10 @@ class CalendarEventRecordDocumentEquality
         e?.sharedWith,
         e?.completed,
         e?.date,
-        e?.user
+        e?.user,
+        e?.isEvent,
+        e?.startTime,
+        e?.endTime
       ]);
 
   @override

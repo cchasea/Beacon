@@ -192,8 +192,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                       .fontStyle,
                                 ),
                             textAlign: TextAlign.start,
-                            cursorColor:
-                                FlutterFlowTheme.of(context).primaryText,
+                            cursorColor: FlutterFlowTheme.of(context).tertiary,
                             enableInteractiveSelection: true,
                             validator: _model
                                 .emailTextFieldTextControllerValidator
@@ -316,8 +315,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                       .fontStyle,
                                 ),
                             textAlign: TextAlign.start,
-                            cursorColor:
-                                FlutterFlowTheme.of(context).primaryText,
+                            cursorColor: FlutterFlowTheme.of(context).tertiary,
                             enableInteractiveSelection: true,
                             validator: _model
                                 .passwordTextFieldTextControllerValidator
@@ -363,6 +361,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                         .labelLarge
                                         .fontStyle,
                                   ),
+                                  fontSize: 17.0,
                                   letterSpacing: 0.0,
                                   fontWeight: FlutterFlowTheme.of(context)
                                       .labelLarge
@@ -458,6 +457,7 @@ class _LoginWidgetState extends State<LoginWidget> {
                                     .labelLarge
                                     .fontStyle,
                               ),
+                              fontSize: 17.0,
                               letterSpacing: 0.0,
                               fontWeight: FlutterFlowTheme.of(context)
                                   .labelLarge

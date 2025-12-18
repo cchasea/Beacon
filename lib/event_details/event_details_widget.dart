@@ -1,12 +1,10 @@
 import '/backend/backend.dart';
 import '/components/delete_event_widget.dart';
-import '/flutter_flow/flutter_flow_calendar.dart';
 import '/flutter_flow/flutter_flow_icon_button.dart';
 import '/flutter_flow/flutter_flow_theme.dart';
 import '/flutter_flow/flutter_flow_util.dart';
 import '/flutter_flow/flutter_flow_widgets.dart';
 import '/custom_code/actions/index.dart' as actions;
-import '/index.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/scheduler.dart';
 import 'package:google_fonts/google_fonts.dart';
@@ -60,7 +58,15 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
         text: dateTimeFormat("MMMEd", widget.eventDoc?.date));
     _model.selectedDateTextFieldFocusNode ??= FocusNode();
 
-    _model.textController3 ??= TextEditingController(
+    _model.startTimeTextFieldTextController ??= TextEditingController(
+        text: dateTimeFormat("jm", widget.eventDoc?.startTime));
+    _model.startTimeTextFieldFocusNode ??= FocusNode();
+
+    _model.endTimeTextFieldTextController ??= TextEditingController(
+        text: dateTimeFormat("jm", widget.eventDoc?.endTime));
+    _model.endTimeTextFieldFocusNode ??= FocusNode();
+
+    _model.textController5 ??= TextEditingController(
         text: valueOrDefault<String>(
       widget.eventDoc?.details,
       'Details',
@@ -126,9 +132,8 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                           onPressed: () async {
                             logFirebaseEvent(
                                 'EVENT_DETAILS_PAGE_back_button_ON_TAP');
-                            logFirebaseEvent('back_button_navigate_to');
-
-                            context.pushNamed(CalanderWidget.routeName);
+                            logFirebaseEvent('back_button_navigate_back');
+                            context.safePop();
                           },
                         ),
                         FlutterFlowIconButton(
@@ -156,7 +161,7 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Text(
-                          'Event Details',
+                          '${widget.eventDoc!.isEvent ? 'Event' : 'Task'} Details',
                           style: FlutterFlowTheme.of(context)
                               .labelLarge
                               .override(
@@ -290,38 +295,60 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                                   .fontStyle,
                             ),
                         textAlign: TextAlign.start,
-                        cursorColor: FlutterFlowTheme.of(context).primaryText,
+                        cursorColor: FlutterFlowTheme.of(context).tertiary,
                         enableInteractiveSelection: true,
                         validator: _model.nameTextfieldTextControllerValidator
                             .asValidator(context),
+                      ),
+                    ),
+                    Material(
+                      color: Colors.transparent,
+                      child: SwitchListTile.adaptive(
+                        key: ValueKey('EditShared'),
+                        value: _model.sharedWithSwitchListTileValue ??=
+                            widget.eventDoc!.shared,
+                        onChanged: (_model.editingMode ? false : true)
+                            ? null
+                            : (newValue) async {
+                                safeSetState(() => _model
+                                    .sharedWithSwitchListTileValue = newValue);
+                              },
+                        title: Text(
+                          'Shared ',
+                          style:
+                              FlutterFlowTheme.of(context).titleLarge.override(
+                                    font: GoogleFonts.roboto(
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .titleLarge
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleLarge
+                                          .fontStyle,
+                                    ),
+                                    letterSpacing: 0.0,
+                                    fontWeight: FlutterFlowTheme.of(context)
+                                        .titleLarge
+                                        .fontWeight,
+                                    fontStyle: FlutterFlowTheme.of(context)
+                                        .titleLarge
+                                        .fontStyle,
+                                  ),
+                        ),
+                        tileColor: FlutterFlowTheme.of(context).secondary,
+                        activeColor: (_model.editingMode ? false : true)
+                            ? Color(0xFF5D5D5D)
+                            : FlutterFlowTheme.of(context).alternate,
+                        activeTrackColor: (_model.editingMode ? false : true)
+                            ? Color(0x94525252)
+                            : FlutterFlowTheme.of(context).primary,
+                        dense: false,
+                        controlAffinity: ListTileControlAffinity.trailing,
                       ),
                     ),
                     Row(
                       mainAxisSize: MainAxisSize.max,
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        Text(
-                          'Date: ',
-                          style:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    font: GoogleFonts.inter(
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
-                                          .fontStyle,
-                                    ),
-                                    fontSize: 20.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontStyle,
-                                  ),
-                        ),
                         Expanded(
                           child: Container(
                             width: 200.0,
@@ -377,26 +404,24 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                                 focusedBorder: InputBorder.none,
                                 errorBorder: InputBorder.none,
                                 focusedErrorBorder: InputBorder.none,
-                                filled: true,
                               ),
                               style: FlutterFlowTheme.of(context)
-                                  .bodyMedium
+                                  .labelLarge
                                   .override(
                                     font: GoogleFonts.inter(
                                       fontWeight: FlutterFlowTheme.of(context)
-                                          .bodyMedium
+                                          .labelLarge
                                           .fontWeight,
                                       fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
+                                          .labelLarge
                                           .fontStyle,
                                     ),
-                                    fontSize: 20.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FlutterFlowTheme.of(context)
-                                        .bodyMedium
+                                        .labelLarge
                                         .fontWeight,
                                     fontStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
+                                        .labelLarge
                                         .fontStyle,
                                   ),
                               cursorColor:
@@ -408,173 +433,555 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                             ),
                           ),
                         ),
-                      ],
-                    ),
-                    Material(
-                      color: Colors.transparent,
-                      child: SwitchListTile.adaptive(
-                        key: ValueKey('EditShared'),
-                        value: _model.sharedWithSwitchListTileValue ??=
-                            widget.eventDoc!.shared,
-                        onChanged: (_model.editingMode == false)
-                            ? null
-                            : (newValue) async {
-                                safeSetState(() => _model
-                                    .sharedWithSwitchListTileValue = newValue);
-                              },
-                        title: Text(
-                          'Shared ',
-                          style:
-                              FlutterFlowTheme.of(context).titleLarge.override(
+                        if (_model.editingMode)
+                          FFButtonWidget(
+                            onPressed: () async {
+                              logFirebaseEvent(
+                                  'EVENT_DETAILS_ChangeDate_button_ON_TAP');
+                              logFirebaseEvent(
+                                  'ChangeDate_button_date_time_picker');
+                              final _datePicked1Date = await showDatePicker(
+                                context: context,
+                                initialDate: getCurrentTimestamp,
+                                firstDate: DateTime(1900),
+                                lastDate: DateTime(2050),
+                                builder: (context, child) {
+                                  return wrapInMaterialDatePickerTheme(
+                                    context,
+                                    child!,
+                                    headerBackgroundColor:
+                                        FlutterFlowTheme.of(context).primary,
+                                    headerForegroundColor:
+                                        FlutterFlowTheme.of(context).info,
+                                    headerTextStyle:
+                                        FlutterFlowTheme.of(context)
+                                            .headlineLarge
+                                            .override(
+                                              font: GoogleFonts.roboto(
+                                                fontWeight: FontWeight.w600,
+                                                fontStyle:
+                                                    FlutterFlowTheme.of(context)
+                                                        .headlineLarge
+                                                        .fontStyle,
+                                              ),
+                                              fontSize: 32.0,
+                                              letterSpacing: 0.0,
+                                              fontWeight: FontWeight.w600,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .headlineLarge
+                                                      .fontStyle,
+                                            ),
+                                    pickerBackgroundColor:
+                                        FlutterFlowTheme.of(context)
+                                            .secondaryBackground,
+                                    pickerForegroundColor:
+                                        FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                    selectedDateTimeBackgroundColor:
+                                        FlutterFlowTheme.of(context).primary,
+                                    selectedDateTimeForegroundColor:
+                                        FlutterFlowTheme.of(context).info,
+                                    actionButtonForegroundColor:
+                                        FlutterFlowTheme.of(context)
+                                            .primaryText,
+                                    iconSize: 24.0,
+                                  );
+                                },
+                              );
+
+                              if (_datePicked1Date != null) {
+                                safeSetState(() {
+                                  _model.datePicked1 = DateTime(
+                                    _datePicked1Date.year,
+                                    _datePicked1Date.month,
+                                    _datePicked1Date.day,
+                                  );
+                                });
+                              } else if (_model.datePicked1 != null) {
+                                safeSetState(() {
+                                  _model.datePicked1 = getCurrentTimestamp;
+                                });
+                              }
+                            },
+                            text: 'Change Date',
+                            options: FFButtonOptions(
+                              height: 47.0,
+                              padding: EdgeInsetsDirectional.fromSTEB(
+                                  16.0, 0.0, 16.0, 0.0),
+                              iconPadding: EdgeInsetsDirectional.fromSTEB(
+                                  0.0, 0.0, 0.0, 0.0),
+                              color: FlutterFlowTheme.of(context).primary,
+                              textStyle: FlutterFlowTheme.of(context)
+                                  .headlineMedium
+                                  .override(
                                     font: GoogleFonts.roboto(
                                       fontWeight: FlutterFlowTheme.of(context)
-                                          .titleLarge
+                                          .headlineMedium
                                           .fontWeight,
                                       fontStyle: FlutterFlowTheme.of(context)
-                                          .titleLarge
+                                          .headlineMedium
                                           .fontStyle,
                                     ),
+                                    fontSize: 25.0,
                                     letterSpacing: 0.0,
                                     fontWeight: FlutterFlowTheme.of(context)
-                                        .titleLarge
+                                        .headlineMedium
                                         .fontWeight,
                                     fontStyle: FlutterFlowTheme.of(context)
-                                        .titleLarge
+                                        .headlineMedium
                                         .fontStyle,
                                   ),
-                        ),
-                        tileColor: FlutterFlowTheme.of(context).secondary,
-                        activeColor: FlutterFlowTheme.of(context).alternate,
-                        activeTrackColor: FlutterFlowTheme.of(context).primary,
-                        dense: false,
-                        controlAffinity: ListTileControlAffinity.trailing,
-                      ),
+                              elevation: 0.0,
+                              borderSide: BorderSide(
+                                color: FlutterFlowTheme.of(context).tertiary,
+                              ),
+                              borderRadius: BorderRadius.circular(24.0),
+                            ),
+                          ),
+                      ],
                     ),
-                    if (_model.editingMode == true)
-                      Flexible(
-                        child: FlutterFlowCalendar(
-                          color: FlutterFlowTheme.of(context).primary,
-                          iconColor: FlutterFlowTheme.of(context).secondaryText,
-                          weekFormat: false,
-                          weekStartsMonday: false,
-                          rowHeight: 50.0,
-                          onChange: (DateTimeRange? newSelectedDate) async {
-                            if (_model.calendarSelectedDay == newSelectedDate) {
-                              return;
-                            }
-                            _model.calendarSelectedDay = newSelectedDate;
-                            logFirebaseEvent(
-                                'EVENT_DETAILS_Calendar_wms5li0a_ON_DATE_');
-                            if (_model.editingMode == true) {
-                              logFirebaseEvent('Calendar_set_form_field');
-                              safeSetState(() {
-                                _model.selectedDateTextFieldTextController
-                                        ?.text =
-                                    dateTimeFormat("MMMEd",
-                                        _model.calendarSelectedDay!.start);
-                              });
-                            }
-                            safeSetState(() {});
-                          },
-                          titleStyle: FlutterFlowTheme.of(context)
-                              .titleLarge
-                              .override(
-                                font: GoogleFonts.roboto(
-                                  fontWeight: FlutterFlowTheme.of(context)
-                                      .titleLarge
-                                      .fontWeight,
-                                  fontStyle: FlutterFlowTheme.of(context)
-                                      .titleLarge
-                                      .fontStyle,
-                                ),
-                                color: FlutterFlowTheme.of(context).tertiary,
-                                letterSpacing: 0.0,
-                                fontWeight: FlutterFlowTheme.of(context)
+                    if (widget.eventDoc?.isEvent ?? true)
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Text(
+                                'Start time:',
+                                style: FlutterFlowTheme.of(context)
                                     .titleLarge
-                                    .fontWeight,
-                                fontStyle: FlutterFlowTheme.of(context)
-                                    .titleLarge
-                                    .fontStyle,
+                                    .override(
+                                      font: GoogleFonts.roboto(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .titleLarge
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleLarge
+                                            .fontStyle,
+                                      ),
+                                      fontSize: 25.0,
+                                      letterSpacing: 0.0,
+                                      fontWeight: FlutterFlowTheme.of(context)
+                                          .titleLarge
+                                          .fontWeight,
+                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .titleLarge
+                                          .fontStyle,
+                                    ),
                               ),
-                          dayOfWeekStyle: FlutterFlowTheme.of(context)
-                              .labelMedium
-                              .override(
-                                font: GoogleFonts.inter(
-                                  fontWeight: FontWeight.normal,
-                                  fontStyle: FlutterFlowTheme.of(context)
-                                      .labelMedium
-                                      .fontStyle,
+                              Container(
+                                width: 200.0,
+                                child: Container(
+                                  width: 200.0,
+                                  child: TextFormField(
+                                    controller:
+                                        _model.startTimeTextFieldTextController,
+                                    focusNode:
+                                        _model.startTimeTextFieldFocusNode,
+                                    autofocus: false,
+                                    enabled: true,
+                                    readOnly: true,
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                      isDense: true,
+                                      labelStyle: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .override(
+                                            font: GoogleFonts.inter(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .fontStyle,
+                                            ),
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelMedium
+                                                    .fontStyle,
+                                          ),
+                                      hintText: 'TextField',
+                                      hintStyle: FlutterFlowTheme.of(context)
+                                          .labelMedium
+                                          .override(
+                                            font: GoogleFonts.inter(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .fontStyle,
+                                            ),
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelMedium
+                                                    .fontStyle,
+                                          ),
+                                      enabledBorder: InputBorder.none,
+                                      focusedBorder: InputBorder.none,
+                                      errorBorder: InputBorder.none,
+                                      focusedErrorBorder: InputBorder.none,
+                                    ),
+                                    style: FlutterFlowTheme.of(context)
+                                        .labelLarge
+                                        .override(
+                                          font: GoogleFonts.inter(
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelLarge
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelLarge
+                                                    .fontStyle,
+                                          ),
+                                          letterSpacing: 0.0,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelLarge
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelLarge
+                                                  .fontStyle,
+                                        ),
+                                    cursorColor: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    enableInteractiveSelection: true,
+                                    validator: _model
+                                        .startTimeTextFieldTextControllerValidator
+                                        .asValidator(context),
+                                  ),
                                 ),
-                                color: FlutterFlowTheme.of(context).tertiary,
-                                fontSize: 14.0,
-                                letterSpacing: 0.0,
-                                fontWeight: FontWeight.normal,
-                                fontStyle: FlutterFlowTheme.of(context)
-                                    .labelMedium
-                                    .fontStyle,
                               ),
-                          dateStyle:
-                              FlutterFlowTheme.of(context).bodyMedium.override(
-                                    font: GoogleFonts.inter(
+                            ],
+                          ),
+                          if (_model.editingMode)
+                            FlutterFlowIconButton(
+                              borderRadius: 8.0,
+                              buttonSize: 50.0,
+                              icon: Icon(
+                                Icons.more_time,
+                                color: FlutterFlowTheme.of(context).info,
+                                size: 30.0,
+                              ),
+                              onPressed: () async {
+                                logFirebaseEvent(
+                                    'EVENT_DETAILS_PAGE_more_time_ICN_ON_TAP');
+                                logFirebaseEvent('IconButton_date_time_picker');
+
+                                final _datePicked2Time = await showTimePicker(
+                                  context: context,
+                                  initialTime: TimeOfDay.fromDateTime(
+                                      getCurrentTimestamp),
+                                  builder: (context, child) {
+                                    return wrapInMaterialTimePickerTheme(
+                                      context,
+                                      child!,
+                                      headerBackgroundColor:
+                                          FlutterFlowTheme.of(context).primary,
+                                      headerForegroundColor:
+                                          FlutterFlowTheme.of(context).info,
+                                      headerTextStyle: FlutterFlowTheme.of(
+                                              context)
+                                          .headlineLarge
+                                          .override(
+                                            font: GoogleFonts.roboto(
+                                              fontWeight: FontWeight.w600,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .headlineLarge
+                                                      .fontStyle,
+                                            ),
+                                            fontSize: 32.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.w600,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineLarge
+                                                    .fontStyle,
+                                          ),
+                                      pickerBackgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                      pickerForegroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                      selectedDateTimeBackgroundColor:
+                                          FlutterFlowTheme.of(context).primary,
+                                      selectedDateTimeForegroundColor:
+                                          FlutterFlowTheme.of(context).info,
+                                      actionButtonForegroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                      iconSize: 24.0,
+                                    );
+                                  },
+                                );
+                                if (_datePicked2Time != null) {
+                                  safeSetState(() {
+                                    _model.datePicked2 = DateTime(
+                                      getCurrentTimestamp.year,
+                                      getCurrentTimestamp.month,
+                                      getCurrentTimestamp.day,
+                                      _datePicked2Time.hour,
+                                      _datePicked2Time.minute,
+                                    );
+                                  });
+                                } else if (_model.datePicked2 != null) {
+                                  safeSetState(() {
+                                    _model.datePicked2 = getCurrentTimestamp;
+                                  });
+                                }
+                                logFirebaseEvent('IconButton_set_form_field');
+                                safeSetState(() {
+                                  _model.startTimeTextFieldTextController
+                                          ?.text =
+                                      dateTimeFormat("jm", _model.datePicked2);
+                                });
+                              },
+                            ),
+                        ],
+                      ),
+                    if (widget.eventDoc?.isEvent ?? true)
+                      Row(
+                        mainAxisSize: MainAxisSize.max,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            mainAxisSize: MainAxisSize.max,
+                            children: [
+                              Text(
+                                'End time:',
+                                style: FlutterFlowTheme.of(context)
+                                    .titleLarge
+                                    .override(
+                                      font: GoogleFonts.roboto(
+                                        fontWeight: FlutterFlowTheme.of(context)
+                                            .titleLarge
+                                            .fontWeight,
+                                        fontStyle: FlutterFlowTheme.of(context)
+                                            .titleLarge
+                                            .fontStyle,
+                                      ),
+                                      fontSize: 25.0,
+                                      letterSpacing: 0.0,
                                       fontWeight: FlutterFlowTheme.of(context)
-                                          .bodyMedium
+                                          .titleLarge
                                           .fontWeight,
                                       fontStyle: FlutterFlowTheme.of(context)
-                                          .bodyMedium
+                                          .titleLarge
                                           .fontStyle,
                                     ),
-                                    fontSize: 18.0,
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .bodyMedium
-                                        .fontStyle,
-                                  ),
-                          selectedDateStyle:
-                              FlutterFlowTheme.of(context).titleSmall.override(
-                                    font: GoogleFonts.interTight(
-                                      fontWeight: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
-                                          .titleSmall
-                                          .fontStyle,
-                                    ),
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .titleSmall
-                                        .fontStyle,
-                                  ),
-                          inactiveDateStyle:
-                              FlutterFlowTheme.of(context).labelMedium.override(
-                                    font: GoogleFonts.inter(
-                                      fontWeight: FlutterFlowTheme.of(context)
+                              ),
+                              Container(
+                                width: 200.0,
+                                child: Container(
+                                  width: 200.0,
+                                  child: TextFormField(
+                                    controller:
+                                        _model.endTimeTextFieldTextController,
+                                    focusNode: _model.endTimeTextFieldFocusNode,
+                                    autofocus: false,
+                                    enabled: true,
+                                    readOnly: true,
+                                    obscureText: false,
+                                    decoration: InputDecoration(
+                                      isDense: true,
+                                      labelStyle: FlutterFlowTheme.of(context)
                                           .labelMedium
-                                          .fontWeight,
-                                      fontStyle: FlutterFlowTheme.of(context)
+                                          .override(
+                                            font: GoogleFonts.inter(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .fontStyle,
+                                            ),
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelMedium
+                                                    .fontStyle,
+                                          ),
+                                      hintText: 'TextField',
+                                      hintStyle: FlutterFlowTheme.of(context)
                                           .labelMedium
-                                          .fontStyle,
+                                          .override(
+                                            font: GoogleFonts.inter(
+                                              fontWeight:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .fontWeight,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .labelMedium
+                                                      .fontStyle,
+                                            ),
+                                            letterSpacing: 0.0,
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelMedium
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelMedium
+                                                    .fontStyle,
+                                          ),
+                                      enabledBorder: InputBorder.none,
+                                      focusedBorder: InputBorder.none,
+                                      errorBorder: InputBorder.none,
+                                      focusedErrorBorder: InputBorder.none,
                                     ),
-                                    letterSpacing: 0.0,
-                                    fontWeight: FlutterFlowTheme.of(context)
-                                        .labelMedium
-                                        .fontWeight,
-                                    fontStyle: FlutterFlowTheme.of(context)
-                                        .labelMedium
-                                        .fontStyle,
+                                    style: FlutterFlowTheme.of(context)
+                                        .labelLarge
+                                        .override(
+                                          font: GoogleFonts.inter(
+                                            fontWeight:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelLarge
+                                                    .fontWeight,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .labelLarge
+                                                    .fontStyle,
+                                          ),
+                                          letterSpacing: 0.0,
+                                          fontWeight:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelLarge
+                                                  .fontWeight,
+                                          fontStyle:
+                                              FlutterFlowTheme.of(context)
+                                                  .labelLarge
+                                                  .fontStyle,
+                                        ),
+                                    cursorColor: FlutterFlowTheme.of(context)
+                                        .primaryText,
+                                    enableInteractiveSelection: true,
+                                    validator: _model
+                                        .endTimeTextFieldTextControllerValidator
+                                        .asValidator(context),
                                   ),
-                        ),
+                                ),
+                              ),
+                            ],
+                          ),
+                          if (_model.editingMode)
+                            FlutterFlowIconButton(
+                              borderRadius: 8.0,
+                              buttonSize: 50.0,
+                              icon: Icon(
+                                Icons.more_time,
+                                color: FlutterFlowTheme.of(context).info,
+                                size: 30.0,
+                              ),
+                              onPressed: () async {
+                                logFirebaseEvent(
+                                    'EVENT_DETAILS_PAGE_more_time_ICN_ON_TAP');
+                                logFirebaseEvent('IconButton_date_time_picker');
+
+                                final _datePicked3Time = await showTimePicker(
+                                  context: context,
+                                  initialTime: TimeOfDay.fromDateTime(
+                                      getCurrentTimestamp),
+                                  builder: (context, child) {
+                                    return wrapInMaterialTimePickerTheme(
+                                      context,
+                                      child!,
+                                      headerBackgroundColor:
+                                          FlutterFlowTheme.of(context).primary,
+                                      headerForegroundColor:
+                                          FlutterFlowTheme.of(context).info,
+                                      headerTextStyle: FlutterFlowTheme.of(
+                                              context)
+                                          .headlineLarge
+                                          .override(
+                                            font: GoogleFonts.roboto(
+                                              fontWeight: FontWeight.w600,
+                                              fontStyle:
+                                                  FlutterFlowTheme.of(context)
+                                                      .headlineLarge
+                                                      .fontStyle,
+                                            ),
+                                            fontSize: 32.0,
+                                            letterSpacing: 0.0,
+                                            fontWeight: FontWeight.w600,
+                                            fontStyle:
+                                                FlutterFlowTheme.of(context)
+                                                    .headlineLarge
+                                                    .fontStyle,
+                                          ),
+                                      pickerBackgroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .secondaryBackground,
+                                      pickerForegroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                      selectedDateTimeBackgroundColor:
+                                          FlutterFlowTheme.of(context).primary,
+                                      selectedDateTimeForegroundColor:
+                                          FlutterFlowTheme.of(context).info,
+                                      actionButtonForegroundColor:
+                                          FlutterFlowTheme.of(context)
+                                              .primaryText,
+                                      iconSize: 24.0,
+                                    );
+                                  },
+                                );
+                                if (_datePicked3Time != null) {
+                                  safeSetState(() {
+                                    _model.datePicked3 = DateTime(
+                                      getCurrentTimestamp.year,
+                                      getCurrentTimestamp.month,
+                                      getCurrentTimestamp.day,
+                                      _datePicked3Time.hour,
+                                      _datePicked3Time.minute,
+                                    );
+                                  });
+                                } else if (_model.datePicked3 != null) {
+                                  safeSetState(() {
+                                    _model.datePicked3 = getCurrentTimestamp;
+                                  });
+                                }
+                                logFirebaseEvent('IconButton_set_form_field');
+                                safeSetState(() {
+                                  _model.endTimeTextFieldTextController?.text =
+                                      dateTimeFormat("jm", _model.datePicked3);
+                                });
+                              },
+                            ),
+                        ],
                       ),
                     Container(
                       width: double.infinity,
                       child: TextFormField(
                         key: ValueKey('EditDetails'),
-                        controller: _model.textController3,
+                        controller: _model.textController5,
                         focusNode: _model.textFieldFocusNode,
                         autofocus: false,
                         enabled: true,
@@ -678,9 +1085,9 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                         textAlign: TextAlign.start,
                         maxLines: null,
                         minLines: 3,
-                        cursorColor: FlutterFlowTheme.of(context).primaryText,
+                        cursorColor: FlutterFlowTheme.of(context).tertiary,
                         enableInteractiveSelection: true,
-                        validator: _model.textController3Validator
+                        validator: _model.textController5Validator
                             .asValidator(context),
                       ),
                     ),
@@ -696,16 +1103,17 @@ class _EventDetailsWidgetState extends State<EventDetailsWidget> {
                             await widget.eventDoc!.reference
                                 .update(createCalendarEventRecordData(
                               name: _model.nameTextfieldTextController.text,
-                              details: _model.textController3.text,
-                              date: _model.calendarSelectedDay?.start,
+                              details: _model.textController5.text,
+                              date: _model.datePicked1,
                               shared: _model.sharedWithSwitchListTileValue,
+                              startTime: _model.datePicked2,
+                              endTime: _model.datePicked3,
                             ));
                             logFirebaseEvent('edit_button_update_page_state');
                             _model.editingMode = false;
                             safeSetState(() {});
-                            logFirebaseEvent('edit_button_navigate_to');
-
-                            context.goNamed(CalanderWidget.routeName);
+                            logFirebaseEvent('edit_button_navigate_back');
+                            context.safePop();
                           }
                         },
                         text: 'Update',

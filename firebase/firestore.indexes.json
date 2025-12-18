@@ -13,6 +13,46 @@
           "order": "ASCENDING"
         }
       ]
+    },
+    {
+      "collectionGroup": "calendar_event",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "User",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "isEvent",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "Completed",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "Date",
+          "order": "ASCENDING"
+        }
+      ]
+    },
+    {
+      "collectionGroup": "calendar_event",
+      "queryScope": "COLLECTION",
+      "fields": [
+        {
+          "fieldPath": "User",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "Shared",
+          "order": "ASCENDING"
+        },
+        {
+          "fieldPath": "Date",
+          "order": "ASCENDING"
+        }
+      ]
     }
   ]
 }

@@ -77,7 +77,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                       ClipRRect(
                         borderRadius: BorderRadius.circular(8.0),
                         child: Image.asset(
-                          'assets/images/Beacon_Logo.png',
+                          'assets/images/Beacon_Logo-removebg.png',
                           width: 300.0,
                           height: 300.0,
                           fit: BoxFit.cover,
@@ -185,7 +185,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                         .fontStyle,
                                   ),
                           textAlign: TextAlign.start,
-                          cursorColor: FlutterFlowTheme.of(context).primaryText,
+                          cursorColor: FlutterFlowTheme.of(context).tertiary,
                           enableInteractiveSelection: true,
                           validator: _model
                               .emailTextFieldTextControllerValidator
@@ -307,7 +307,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                         .fontStyle,
                                   ),
                           textAlign: TextAlign.start,
-                          cursorColor: FlutterFlowTheme.of(context).primaryText,
+                          cursorColor: FlutterFlowTheme.of(context).tertiary,
                           enableInteractiveSelection: true,
                           validator: _model
                               .passwordTextFieldTextControllerValidator
@@ -432,7 +432,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                         .fontStyle,
                                   ),
                           textAlign: TextAlign.start,
-                          cursorColor: FlutterFlowTheme.of(context).primaryText,
+                          cursorColor: FlutterFlowTheme.of(context).tertiary,
                           enableInteractiveSelection: false,
                           validator: _model
                               .confirmPasswordTextFieldTextControllerValidator
@@ -541,7 +541,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                         .fontStyle,
                                   ),
                           textAlign: TextAlign.start,
-                          cursorColor: FlutterFlowTheme.of(context).primaryText,
+                          cursorColor: FlutterFlowTheme.of(context).tertiary,
                           enableInteractiveSelection: true,
                           validator: _model
                               .userNameTextFieldTextControllerValidator
@@ -617,12 +617,13 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                             content: Text(
                               'Username already taken.',
                               style: TextStyle(
-                                color: FlutterFlowTheme.of(context).primaryText,
+                                color:
+                                    FlutterFlowTheme.of(context).secondaryText,
                               ),
                             ),
                             duration: Duration(milliseconds: 4000),
-                            backgroundColor:
-                                FlutterFlowTheme.of(context).warning,
+                            backgroundColor: FlutterFlowTheme.of(context)
+                                .secondaryBackground,
                           ),
                         );
                       }
@@ -685,6 +686,7 @@ class _SignUpWidgetState extends State<SignUpWidget> {
                                   .labelLarge
                                   .fontStyle,
                             ),
+                            fontSize: 17.0,
                             letterSpacing: 0.0,
                             fontWeight: FlutterFlowTheme.of(context)
                                 .labelLarge

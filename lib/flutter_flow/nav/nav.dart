@@ -89,16 +89,6 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
               : LoginWidget(),
         ),
         FFRoute(
-          name: GatherNPSWidget.routeName,
-          path: GatherNPSWidget.routePath,
-          builder: (context, params) => GatherNPSWidget(
-            rating: params.getParam(
-              'rating',
-              ParamType.int,
-            ),
-          ),
-        ),
-        FFRoute(
             name: ProfileWidget.routeName,
             path: ProfileWidget.routePath,
             builder: (context, params) => params.isEmpty
@@ -113,17 +103,41 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
           builder: (context, params) => DisplayNPSTEMPWidget(),
         ),
         FFRoute(
-          name: CalanderWidget.routeName,
-          path: CalanderWidget.routePath,
-          builder: (context, params) => params.isEmpty
-              ? NavBarPage(initialPage: 'Calander')
-              : CalanderWidget(
-                  dayHasEvent: params.getParam(
-                    'dayHasEvent',
-                    ParamType.bool,
-                  ),
-                ),
+          name: GatherNPSWidget.routeName,
+          path: GatherNPSWidget.routePath,
+          builder: (context, params) => GatherNPSWidget(
+            rating: params.getParam(
+              'rating',
+              ParamType.int,
+            ),
+          ),
         ),
+        FFRoute(
+          name: LoginWidget.routeName,
+          path: LoginWidget.routePath,
+          builder: (context, params) => LoginWidget(),
+        ),
+        FFRoute(
+          name: SignUpWidget.routeName,
+          path: SignUpWidget.routePath,
+          builder: (context, params) => SignUpWidget(),
+        ),
+        FFRoute(
+            name: ImportBrightspaceWidget.routeName,
+            path: ImportBrightspaceWidget.routePath,
+            builder: (context, params) => NavBarPage(
+                  initialPage: '',
+                  page: ImportBrightspaceWidget(),
+                )),
+        FFRoute(
+            name: HomePageWidget.routeName,
+            path: HomePageWidget.routePath,
+            builder: (context, params) => params.isEmpty
+                ? NavBarPage(initialPage: 'HomePage')
+                : NavBarPage(
+                    initialPage: 'HomePage',
+                    page: HomePageWidget(),
+                  )),
         FFRoute(
           name: EventDetailsWidget.routeName,
           path: EventDetailsWidget.routePath,
@@ -139,14 +153,17 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
           ),
         ),
         FFRoute(
-            name: HomePageWidget.routeName,
-            path: HomePageWidget.routePath,
-            builder: (context, params) => params.isEmpty
-                ? NavBarPage(initialPage: 'HomePage')
-                : NavBarPage(
-                    initialPage: 'HomePage',
-                    page: HomePageWidget(),
-                  )),
+          name: CalendarWidget.routeName,
+          path: CalendarWidget.routePath,
+          builder: (context, params) => params.isEmpty
+              ? NavBarPage(initialPage: 'Calendar')
+              : CalendarWidget(
+                  dayHasEvent: params.getParam(
+                    'dayHasEvent',
+                    ParamType.bool,
+                  ),
+                ),
+        ),
         FFRoute(
             name: GroupEventsWidget.routeName,
             path: GroupEventsWidget.routePath,
@@ -155,17 +172,7 @@ GoRouter createRouter(AppStateNotifier appStateNotifier, [Widget? entryPage]) =>
                 : NavBarPage(
                     initialPage: 'GroupEvents',
                     page: GroupEventsWidget(),
-                  )),
-        FFRoute(
-          name: LoginWidget.routeName,
-          path: LoginWidget.routePath,
-          builder: (context, params) => LoginWidget(),
-        ),
-        FFRoute(
-          name: SignUpWidget.routeName,
-          path: SignUpWidget.routePath,
-          builder: (context, params) => SignUpWidget(),
-        )
+                  ))
       ].map((r) => r.toRoute(appStateNotifier)).toList(),
     );
 

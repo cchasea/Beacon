@@ -35,7 +35,7 @@ void main() async {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: 'testingemail2@gmail.com', password: 'testing');
       await tester.pumpWidget(MyApp(
-        entryPage: CalanderWidget(),
+        entryPage: CalendarWidget(),
       ));
       await GoogleFonts.pendingFonts();
 
@@ -54,7 +54,7 @@ void main() async {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: 'testingemail2@gmail.com', password: 'testing');
       await tester.pumpWidget(MyApp(
-        entryPage: CalanderWidget(),
+        entryPage: CalendarWidget(),
       ));
       await GoogleFonts.pendingFonts();
 
@@ -70,7 +70,7 @@ void main() async {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: 'testingemail2@gmail.com', password: 'testing');
       await tester.pumpWidget(MyApp(
-        entryPage: CalanderWidget(),
+        entryPage: CalendarWidget(),
       ));
       await GoogleFonts.pendingFonts();
 
@@ -84,7 +84,7 @@ void main() async {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: 'testingemail2@gmail.com', password: 'testing');
       await tester.pumpWidget(MyApp(
-        entryPage: CalanderWidget(),
+        entryPage: CalendarWidget(),
       ));
       await GoogleFonts.pendingFonts();
 
@@ -107,7 +107,7 @@ void main() async {
       _overrideOnError();
 
       await tester.pumpWidget(MyApp(
-        entryPage: CalanderWidget(),
+        entryPage: CalendarWidget(),
       ));
       await GoogleFonts.pendingFonts();
 
@@ -168,7 +168,7 @@ void main() async {
       _overrideOnError();
 
       await tester.pumpWidget(MyApp(
-        entryPage: CalanderWidget(),
+        entryPage: CalendarWidget(),
       ));
       await GoogleFonts.pendingFonts();
 
@@ -195,7 +195,7 @@ void main() async {
           find.byKey(const ValueKey('password_textField_4lj6')), 'Conlan10');
       await tester.tap(find.byKey(const ValueKey('login_button_y5uo')));
       await tester.pumpAndSettle(const Duration(milliseconds: 1000));
-      expect(find.byKey(const ValueKey('DueToday_text_f5g7')), findsOneWidget);
+      expect(find.byKey(const ValueKey('UNDEFINED')), findsOneWidget);
     });
 
     testWidgets('Account does not exist', (WidgetTester tester) async {
